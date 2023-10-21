@@ -1,1 +1,1 @@
-Philophers
+Philosophers
