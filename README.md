@@ -1,4 +1,4 @@
-Philosophers
+# Philosophers
 
 ## To succeed this assignment:
 - One or more philosophers sit at a round table.
@@ -163,8 +163,8 @@ pthread_mutex_unlock(&mutex);
 13. waitpid
 14. sem_open
 15. sem_close
-16. sem_post
-17. sem_wait
+16. sem_wait
+17. sem_post
 18. sem_unlink
 
 #### 🔸 **1. memset():**
@@ -586,23 +586,23 @@ Example:
 ```
 int main(void) 
 {
-    // Create a new child process by forking
+	// Create a new child process by forking
 	int	id = fork();
 
-    if (id == -1) 
+	if (id == -1) 
 	{
-        // Forking failed
-        perror("Fork failed");
-        return (-1);
-    } 
+		// Forking failed
+		perror("Fork failed");
+		return (-1);
+	} 
 	else if (id == 0)
-        // Code executed by the child process
-        printf("Hello from the child process! (PID: %d)\n", id);
-    else 
-        // Code executed by the parent process
-        printf("Hello from the parent process! (PID: %d, Child PID: %d)\n", getpid(), id);
+		// Code executed by the child process
+		printf("Hello from the child process! (PID: %d)\n", id);
+	else 
+		// Code executed by the parent process
+		printf("Hello from the parent process! (PID: %d, Child PID: %d)\n", getpid(), id);
 
-    return (0);
+	return (0);
 }
 ```
 
@@ -612,11 +612,11 @@ int main(void)
 int main(void) 
 {
 	fork(); 
-    fork(); 
-    fork(); 
-    printf("Hello world!\n");
+	fork(); 
+	fork(); 
+	printf("Hello world!\n");
 
-    return (0);
+	return (0);
 }
 ```
 - Output:
@@ -681,23 +681,392 @@ int main(void)
 ```
 
 #### 🔸 **13. waitpid():** 
-#### 🔸 **14. sem_open():** 
+- used to synchronize the parent and child processes.
+
+Syntax: 
+```
+#include <sys/wait.h>
+
+pid_t waitpid(pid_t pid, int *status, int options);
+```
+
+Parameters:
+1. `pid`: 
+	- The process ID to wait for. 
+	- Use -1 to wait for any child process, or a specific PID to wait for a particular child process.
+2. `status`: 
+	- A pointer to an integer where the exit status of the child process will be stored.
+3. `options`: 
+	- Additional options for controlling the behavior of waitpid. 
+	- Commonly used options include WNOHANG (non-blocking) and WUNTRACED (report status of stopped child processes).
+
+Return value: 
+- On success, returns the process ID of the terminated child process.
+- On failure, returns -1, and sets errno to indicate the error.
+
+Example: 
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main(void) 
+{
+	pid_t child_pid = fork();
+
+	// Code executed by the parent process
+	printf("Parent process (PID: %d) waiting for the child to finish.\n", getpid());
+
+	int status;
+	pid_t terminated_pid = waitpid(child_pid, &status, 0);
+
+	if (terminated_pid == -1) 
+	{
+		perror("Waitpid failed");
+		return (-1);
+	}
+	
+	printf("Child process (PID: %d) exited with status: %d\n", terminated_pid, WEXITSTATUS(status));
+	printf("Parent process exiting.\n");
+
+	return (0);
+}
+```
+
+#### 🔸 **14. sem_open():**
+- used for creating or opening a named semaphore. 
+- Semaphores are synchronization mechanisms that help coordinate access to shared resources or critical sections of code among multiple processes.
+
+Syntax:
+```
+#include <semaphore.h>
+
+sem_t *sem_open(const char *name, int oflag, mode_t mode, unsigned int value);
+```
+
+Parameters:
+1. `name`: 
+	- A string representing the name of the semaphore. 
+	- This can be a name that begins with a slash ('/') character or a name that does not contain a slash. 
+	- The name is used to identify the semaphore among processes.
+2. `oflag`: 
+	- The flags specifying the operation to be performed. 
+	- It can include one or more of the following:
+		- `O_CREAT`: Create the semaphore if it does not exist.
+		- `O_EXCL`: If O_CREAT is also specified and the semaphore already exists, return an error.
+		- `O_RDWR`: Open the semaphore for reading and writing.
+3. `mode`: 
+	- The file permissions to be set if `O_CREAT` is specified. 
+	- It is specified in octal mode (e.g., 0644).
+
+4. `value`: 
+	- The initial value for the semaphore.
+
+Return value:
+- On success, a pointer to the semaphore is returned.
+- On failure, SEM_FAILED is returned, and errno is set to indicate the error.
+
+Example:
+```
+#include <semaphore.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) 
+{
+    sem_t *my_semaphore;
+
+    // Open or create a semaphore named "my_sem" with an initial value of 1
+    my_semaphore = sem_open("/my_sem", O_CREAT | O_EXCL, 0644, 1);
+
+    if (my_semaphore == SEM_FAILED) 
+	{
+        perror("Error creating/opening semaphore");
+        exit(EXIT_FAILURE);
+    }
+
+    // Use the semaphore...
+
+    // Close and unlink the semaphore when done
+    sem_close(my_semaphore);
+    sem_unlink("/my_sem");
+
+    return (0);
+}
+```
+
 #### 🔸 **15. sem_close():** 
-#### 🔸 **16. sem_post():** 
-#### 🔸 **17. sem_wait():** 
-#### 🔸 **18. psem_unlin():** 
+- used to close a named semaphore that was previously opened with sem_open. Closing a semaphore is necessary to release system resources associated with the semaphore.
+
+Syntax:
+```
+#include <semaphore.h>
+
+int sem_close(sem_t *sem);
+```
+
+Parameters:
+1. `sem`: 
+	- A pointer to the semaphore object that you want to close.
+
+Return value:
+- Returns 0 on success.
+- Returns -1 on failure, and sets errno to indicate the error.
+
+Example:
+```
+#include <semaphore.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) 
+{
+    sem_t *my_semaphore;
+
+    // Open or create a semaphore named "my_sem" with an initial value of 1
+    my_semaphore = sem_open("/my_sem", O_CREAT | O_EXCL, 0644, 1);
+
+    if (my_semaphore == SEM_FAILED) 
+	{
+        perror("Error creating/opening semaphore");
+        exit(EXIT_FAILURE);
+    }
+
+    // Use the semaphore...
+
+    // Close and unlink the semaphore when done
+    sem_close(my_semaphore);
+    sem_unlink("/my_sem");
+
+    return (0);
+}
+```
+
+
+#### 🔸 **16. sem_wait():** 
+- used to decrement the value of the semaphore, blocking the calling thread if the semaphore's value is currently zero. 
+- It is typically used to acquire access to a shared resource or to enter a critical section.
+
+Syntax:
+```
+#include <semaphore.h>
+
+int sem_wait(sem_t *sem);
+```
+
+Parameters:
+1. `sem`: 
+	- A pointer to the semaphore object to wait on.
+
+Return value:
+- On success, sem_wait() returns 0.
+- On failure, it returns -1, and sets errno to indicate the error.
+
+Example:
+```
+#include <stdio.h>
+#include <pthread.h>
+#include <semaphore.h>
+
+sem_t semaphore;
+
+void *thread_function(void *arg) 
+{
+    //Wait for the semaphore to be available
+    sem_wait(&semaphore);
+
+    //Critical section: shared resource access
+    printf("Thread has acquired the semaphore\n");
+
+    //Release the semaphore
+    sem_post(&semaphore);
+
+    pthread_exit(NULL);
+}
+
+int main(void) 
+{
+    pthread_t thread_id;
+    
+    //Initialize the semaphore with an initial value of 1
+    sem_init(&semaphore, 0, 1);
+
+    //Create a new thread
+    pthread_create(&thread_id, NULL, thread_function, NULL);
+
+    //Wait for the thread to finish
+    pthread_join(thread_id, NULL);
+
+    //Destroy the semaphore
+    sem_destroy(&semaphore);
+
+    return (0);
+}
+```
+
+#### 🔸 **17. sem_post():** 
+- used to increment the value of the semaphore, allowing other threads waiting on the semaphore to proceed. 
+- It is typically used to release a resource or signal the availability of a shared resource after it has been used.
+
+Syntax:
+```
+#include <semaphore.h>
+
+int sem_post(sem_t *sem);
+```
+
+Parameters:
+1. `sem`: 
+	- A pointer to the semaphore object to be incremented.
+
+Return value:
+- On success, sem_post() returns 0.
+- On failure, it returns -1, and sets errno to indicate the error.
+
+Example:
+```
+#include <stdio.h>
+#include <pthread.h>
+#include <semaphore.h>
+
+sem_t semaphore;
+
+void *thread_function(void *arg) 
+{
+    //Wait for the semaphore to be available
+    sem_wait(&semaphore);
+
+    //Critical section: shared resource access
+    printf("Thread has acquired the semaphore\n");
+
+    //Release the semaphore
+    sem_post(&semaphore);
+
+    pthread_exit(NULL);
+}
+
+int main(void) 
+{
+    pthread_t thread_id;
+    
+    //Initialize the semaphore with an initial value of 1
+    sem_init(&semaphore, 0, 1);
+
+    //Create a new thread
+    pthread_create(&thread_id, NULL, thread_function, NULL);
+
+    //Wait for the thread to finish
+    pthread_join(thread_id, NULL);
+
+    //Destroy the semaphore
+    sem_destroy(&semaphore);
+
+    return (0);
+}
+```
+
+#### 🔸 **18. sem_unlink():** 
+- used to unlink (delete) a named semaphore. 
+
+Syntax:
+```
+#include <semaphore.h>
+
+int sem_unlink(const char *name);
+```
+
+Parameters:
+1. `name`: 
+	- A pointer to a null-terminated string containing the name of the semaphore to be unlinked. 
+	- This name should follow the naming conventions specified by the system.
+
+Return value:
+- Returns 0 on success.
+- Returns -1 if an error occurs, and sets errno to indicate the error.
+
+Example:
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <semaphore.h>
+
+int main(void) 
+{
+    // Name of the semaphore to unlink
+    const char *semaphore_name = "/my_semaphore";
+
+    // Unlink the semaphore
+    if (sem_unlink(semaphore_name) == -1) 
+	{
+        perror("Error unlinking semaphore");
+        return (-1);
+    }
+
+    printf("Semaphore unlinked successfully.\n");
+    return (0);
+}
+```
+
+## Evaluation Checklist:
+
+**Error Handling:**
+1. Does not crash or have undefined behaviour.
+2. Does not have memory leaks.
+3. No norm errors.
+4. No global variables.
+5. Defend if the program doesn't work on slower machines.
+
+**Code checks and rationale for each:**
+1. There is one thread per philosopher.
+2. There is one fork per philosopher.
+3. There is a mutex per fork. The mutex is used to check the fork value and/or change it.
+4. The output view is never scrambled.
+5. The death of a philospher can be checked.
+6. There is a mutex to protect when a philosopher dies and starts eating at the same time.
+
+**Testing:**
+1. Should not test with more than 200 philosphers.
+2. Should not test when either `time_to_die`, `time_to_eat` or `time_to_sleep` is under 60`ms`.
+3. Test with `1 800 200 200`: the philosopher should not eat and should die.
+4. Test with `5 800 200 200`: no one should die.
+5. Test with `5 800 200 200 7`: no one should die, and the simulation should stop when all the philosophers has eaten at least 7 times each.
+6. Test with `4 410 200 200`: no one should die.
+7. Test with `4 310 200 100`: one philosopher should die.
+8. Test with 2 philosphers and che the different times: a death delayed by more than 10 ms is unacceptable.
+9. Test with any values of your choice to verify all the requirements. Ensure philosophers die at the right time, that they don't steal forks, etc.
+
+**BONUS code checks and rationale for each:**
+1. There is one process per philosopher and the main process is not a philosopher (the first process waits for all philosopher processes?).
+2. There are no orphan processes at the end of the execution of this program.
+3. There is a single semaphore that represents the number of forks.
+4. The output is protected against multiple access. To avoid a scrambled display.
+5. The death of a philospher can be checked.
+6. There is a semaphore to prevent a philosopher from dying and starts eating at the same timee.
+
+**BONUS testing:**
+1. Should not test with more than 200 philosphers.
+2. Should not test when either `time_to_die`, `time_to_eat` or `time_to_sleep` is under 60`ms`.
+3. Test 5 800 200 200. No philosopher should die.
+4. Test with `5 800 200 200 7`: no one should die, and the simulation should stop when all the philosophers has eaten at least 7 times each.
+5. Test with `4 410 200 200`: no one should die.
+6. Test with `4 310 200 100`: one philosopher should die.
+7. Test with 2 philosphers and che the different times: a death delayed by more than 10 ms is unacceptable.
+8. Test with any values of your choice to verify all the requirements. Ensure philosophers die at the right time, that they don't steal forks, etc.
 
 
 # References:
 
-**Introduction To Threads (pthreads)**
-- An introduction on how to use threads in C with the pthread.h library (POSIX thread library)
-- https://www.youtube.com/watch?v=ldJ8WGZVXZk
+[Introduction To Threads (pthreads)](https://www.youtube.com/watch?v=ldJ8WGZVXZk
+- An introduction on how to use threads in C with the pthread.h library (POSIX thread library).)
 
-**Unix Threads in C**
-- Playlist of all things threads related
-- https://youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2&si=0QgGb_xmrDESzk62 
+[Unix Threads in C](https://youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2&si=0QgGb_xmrDESzk62)
+- Playlist of all things threads related.
 
-**The dining Philosophers in C**
-- Oceano's walkthrough of the project
-- https://youtu.be/zOpzGHwJ3MU?si=-C45_b4npZc_n4p6 
+[The dining Philosophers in C](https://youtu.be/zOpzGHwJ3MU?si=-C45_b4npZc_n4p6)
+- Oceano's walkthrough of the project.
+
+[DexTutor: Dining Philosopher Problem program in C](https://www.youtube.com/watch?v=27lu1lwvoGY&t=49s)
+- Demonstration of creating threads.
+
