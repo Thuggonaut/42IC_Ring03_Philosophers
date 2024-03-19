@@ -206,11 +206,11 @@ int main(void)
 	<tr>
 		<td> Library & Syntax </td>
 		<td> 
-
-		```c
-		<string.h>
-		void *memset(void *ptr, int value, size_t num);
-		``` 
+		
+```c
+<string.h>
+void *memset(void *ptr, int value, size_t num);
+``` 
 </td>
 		</tr>
 		<tr>
