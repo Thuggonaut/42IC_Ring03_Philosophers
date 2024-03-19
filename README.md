@@ -221,6 +221,13 @@ int main(void)
   <td>
 
   Initialize or clear blocks of memory to a specific value
+    <td>
+
+  Use
+  </td>
+  <td>
+
+  Initialize or clear blocks of memory to a specific value
   </td>
 <tbody></table>
 
