@@ -258,19 +258,21 @@ int main(void)
 
 <table>
 	<tr>
-		<th> 🔸  </th>
+		<th> 🔸 gettimeofday() </th>
 		<th> </th>
 	</tr>
 	<tr>
 		<th> Use </th>
-		<td>  </td>
+		<td> Obtain the current time </td>
 	</tr>
 	<tr>
 		<th> Library & Syntax </th>
 		<td> 
 
 ```c
+<sys/time.h>
 
+int gettimeofday(struct timeval *tv, struct timezone *tz);
 ``` 
 </td>
 		</tr>
@@ -279,32 +281,6 @@ int main(void)
 		<td>
 
 ```c
-
-```
-</td>
-		</tr>
-</table>
-
-#### 🔸 **3. gettimeofday():**
-- Used to obtain the current time
-
-Syntax:
-```
-int gettimeofday(struct timeval *tv, struct timezone *tz);
-```
-Parameters:
-1. `tv`: 
-	- A pointer to a struct timeval that will store the current time (including seconds and microseconds).
-
-2. `tz`: 
-	- (Deprecated and ignored on many systems) A pointer to a struct timezone that was used to store the timezone information. 
-	- **It's generally recommended to pass NULL for this parameter.**
-
-Return value:
-- Returns 0 if the execution was successful (execution successfully suspended) or -1 if there was an error.
-
-Example:
-```
 #include <stdio.h>
 #include <sys/time.h>
 
@@ -323,37 +299,36 @@ int main(void)
 	return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
-#### 🔸 **4. pthread_create():**
-- Used to create a new thread within a program.
+<table>
+	<tr>
+		<th> 🔸 pthread_create() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Create a new thread within a program </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Syntax:
-```
+```c
+<pthread.h>
+
 int	pthread_create(pthread_t *thread_id, const pthread_attr_t *attr,
 					void *(*thread_function) (void *), void *arg);
-```
-Parameters:
-1. `thread_id`: 
-	- A pointer to a pthread_t variable that stores the ID of the newly created thread.
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-2. `attr`: 
-	- A pointer to a pthread_attr_t structure that specifies various attributes for the new thread. 
-	- If `NULL` is passed, the default attributes are used.
-
-3. `thread_function`: 
-	- A pointer to the function that will be executed by the new thread. 
-	- It takes a single argument of type `void*` and 
-	- Must return a `void*`.
-
-4. `arg`: 
-	- The argument to be passed to the thread_function function. This can be used to pass data or information to the newly created thread.
-
-Return value:
-- If the thread creation is successful, pthread_create returns 0.
-- If there is an error, a non-zero error code is returned.
-
-Example:
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 
@@ -387,6 +362,10 @@ int main(void)
 	return (0);
 }
 ```
+</td>
+		</tr>
+</table>
+
 
 #### 🔸 **5. pthread_detach():** 
 - Used to detach the newly created thread (thread_id). 
