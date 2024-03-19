@@ -59,56 +59,42 @@
 4. 🔸 A message announcing a philosopher died should be displayed no more than 10 ms after the actual death of the philosopher.
 5. 🔸 Again, philosophers should avoid dying!
 6. 🔸 Your program must not have any data races.
-
-
-## Mandatory rules:
-- Each philosopher should be a thread.
-- There is one fork between each pair of philosophers. 
-	- Therefore, if there are several philosophers, each philosopher has a fork on their left side and a fork on their right side. 
-	- If there is only one philosopher, there should be only one fork on the table.
-- To prevent philosophers from duplicating forks, you should protect the forks state with a mutex for each of them.
-
-
-## Bonus rules:
-- All the forks are put in the middle of the table.
-- They have no states in memory but the number of available forks is represented by a semaphore.
-- Each philosopher should be a process. But the main process should not be a philosopher.
-
-
-## What is a thread?
-
-Single threaded program
-- one sequence of statements that executes over time [img]
-
-Multi threaded program
-- multiple sequence of statements that executes over the same period of time
-- Parallel execution:
-	- Not always possible to execute threads in parallel due to hard/software [img]
-
-- Concurrent execution when parallel not possible:
-	- CPU switches back and forth bewtween multiple threads
-	- only one thread is executed at any given time [img]
-
-Threads can improve performance. 
-
-
-## How to create a thread?
-- We use the <pthread.h> library.
-	1.  Call `pthread_create()` to create a thread.
-	2.  Give `pthread_create()` a function to run.
-		- the function will run in it's own thread. 
-	3. Call `pthread_join()` to join the newly created thread back to the main thread. 
-		- `pthread_join()` by the time it runs, will pause and wait until the created thread finishes execution if it hasn't already [img]
-
-
-## What are data races?
+- ***🧐 What are data races?***
 - A data race is an instance of a race condition where multiple threads compete to access and modify shared data (variable or state) at the same time, leading to unpredictable outcomes.
 - A race condition is when a program depends on the timing or order of events, leading to issues.
 	- For instance, in a multithreaded environment, a data race may occur when multiple threads attempt to execute a function that involves shared variables. This simultaneous access can lead to inconsistencies, causing the final value of a variable to be out of sync with the expected result due to the unpredictable interleaving of thread executions. 
 - Proper synchronization mechanisms such as mutexes or semaphores are essential to prevent race conditions.
 
 
-## What are mutexes?
+# 🔷 Mandatory rules:
+
+### 1️⃣ Each philosopher should be a thread.
+- ***🧐 What is a thread?***
+	- Threads can improve performance.
+	- Single threaded program
+		- One sequence of statements that executes over time [img]
+	- Multi threaded program
+		- Multiple sequence of statements that executes over the same period of time
+		- Parallel execution:
+			- Not always possible to execute threads in parallel due to hard/software [img]
+		- Concurrent execution when parallel not possible:
+			- CPU switches back and forth bewtween multiple threads
+			- only one thread is executed at any given time [img]
+- ***🧐 How to create a thread?***
+- We use the <pthread.h> library.
+	1. Call `pthread_create()` to create a thread.
+	2. Give `pthread_create()` a function to run.
+		- the function will run in it's own thread. 
+	3. Call `pthread_join()` to join the newly created thread back to the main thread. 
+		- `pthread_join()` by the time it runs, will pause and wait until the created thread finishes execution if it hasn't already [img]
+
+
+### 2️⃣ There is one fork between each pair of philosophers. 
+- Therefore, if there are several philosophers, each philosopher has a fork on their left side and a fork on their right side. 
+- If there is only one philosopher, there should be only one fork on the table.
+
+### 3️⃣ To prevent philosophers from duplicating forks, you should protect the forks state with a mutex for each of them.
+- ***🧐 What are mutexes?***
 - Short for mutual exclusion, a mutex is a synchronization mechanism to control access to shared resources, allowing only one thread or process at a time to execute a critical section of code.
 - We can allow one thread to access a section of code (e.g. a thread function) at a time, by locking it. This way, only one thread can execute said code at any given time. 
 	- We create a lock before the citical code
@@ -117,7 +103,7 @@ Threads can improve performance.
 	- Any subsequent threads when reaching this lock, will pause, and wait until the lock has been released, in order to aquire it. 
 - Basically, how a mutex works is, a thread will aquire a lock, run the execution of the code, then release the lock when done. 
 
-Example of using a mutex:
+- ***🧐 Example of using a mutex:***
 1. In main() We make a mutex variable;
 2. In main() Initialize the mutex;
 3. In main() Destroy the mutex when done;
@@ -142,9 +128,15 @@ pthread_mutex_unlock(&mutex);
 	- Once the next thread aquires the lock, it'll execute the code, with the updated variables/data. 
 
 
-## What are semaphores?
+# 🔷 Bonus rules:
+### 1️⃣ All the forks are put in the middle of the table.
+
+### 2️⃣ They have no states in memory but the number of available forks is represented by a semaphore.
+- ***🧐 What are semaphores?***
 - Semaphores are counters that control access to a resource with an arbitrary number of permits. 
 - They can be used to limit the number of threads that can access a resource simultaneously.
+
+### 3️⃣ Each philosopher should be a process. But the main process should not be a philosopher.
 
 
 ## External functions to learn:
