@@ -434,53 +434,57 @@ int main(void)
 		</tr>
 </table>
 
+<table>
+	<tr>
+		<th> 🔸 pthread_join() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Wait for the thread with ID thread_id to finish its execution </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
+```c
+<pthread.h>
 
-#### 🔸 **6. pthread_join():** 
-- Used to wait for the thread with ID thread_id to finish its execution.
-
-Syntax:
-```
 int pthread_join(pthread_t thread_id, void **retval);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td> See example in pthread_create() </td>
+		</tr>
+</table>
 
-Parameters:
-1. `thread_id`: 
-	- The ID of the thread to be joined.
+<table>
+	<tr>
+		<th> 🔸 pthread_mutex_init() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Initialize a mutex </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-2. `retval`: 
-	- A pointer to a location where the exit status of the joined thread can be stored. - This is an optional parameter. If you're not interested in the exit status, you can pass `NULL`.
+```c
+<pthread.h>
 
-Return value:
-- If successful, pthread_join() returns 0.
-- On failure, it returns an error code.
-
-Example:
-- See example in **4. pthread_create()**
-
-
-#### 🔸 **7. pthread_mutex_init():** 
-- Used to initialize a mutex
-
-Syntax:
-```
 int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `mutex`: 
-	- A pointer to a pthread_mutex_t variable that will be initialized.
-
-2. `attr`: 
-	- A pointer to a pthread_mutexattr_t structure that specifies various attributes for the mutex. 
-	- If `NULL` is passed, the default attributes are used.
-
-Return value:
-- If the mutex initialization is successful, pthread_mutex_init returns 0.
-- If there is an error, a non-zero error code is returned.
-
-Example:
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 
@@ -498,26 +502,35 @@ int main(void)
 	return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
+<table>
+	<tr>
+		<th> 🔸 pthread_mutex_destroy() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Destroy the mutex after it has been used </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-#### 🔸 **8. pthread_mutex_destroy():**
-- Used to destroy the mutex after it has been used
+```c
+<pthread.h>
 
-Syntax:
-```
 int pthread_mutex_destroy(pthread_mutex_t *mutex);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `mutex`: 
-	- A pointer to the mutex object to be destroyed.
-
-Return value:
-- If the mutex is successfully destroyed, pthread_mutex_destroy returns 0.
-- If an error occurs, a non-zero error code is returned.
-
-Example:
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 
@@ -554,74 +567,96 @@ int main(void)
 	return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
+<table>
+	<tr>
+		<th> 🔸 pthread_mutex_lock() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Lock the mutex before accessing and updating the shared data </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-#### 🔸 **9. pthread_mutex_lock():** 
-- Used to lock the mutex before accessing and updating the shared data 
+```c
+<pthread.h>
 
-Syntax:
-```
 int pthread_mutex_lock(pthread_mutex_t *mutex);
-```
-Parameters:
-1. `mutex`: 
-	- A pointer to a pthread_mutex_t variable, representing the mutex object that you want to lock. 
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td> See example in pthread_mutex_destroy() </td>
+		</tr>
+</table>
 
-Return value:
-- If the mutex is successfully locked, pthread_mutex_lock() returns 0.
-- If an error occurs, a non-zero error code is returned.
+<table>
+	<tr>
+		<th> 🔸 pthread_mutex_unlock() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Unlock the mutex, allowing other threads to access the shared resource </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Example:
-- See example in **8. pthread_mutex_destroy()**
+```c
+<pthread.h>
 
-
-#### 🔸 **10. pthread_mutex_unlock():** 
-- Used to lock the mutex before accessing and updating the shared data 
-
-Syntax:
-```
 int pthread_mutex_unlock(pthread_mutex_t *mutex);
-```
-Parameters:
-1. `mutex`: 
-	- A pointer to the mutex object that was previously initialized.
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td> See example in pthread_mutex_destroy() </td>
+		</tr>
+</table>
 
-Return value:
-- If the mutex is successfully locked, pthread_mutex_lock() returns 0.
-- If an error occurs, a non-zero error code is returned.
+<table>
+	<tr>
+		<th> 🔸 fork() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> 
 
-Example:
-- See example in **8. pthread_mutex_destroy()**
-
-
-#### 🔸 **11. fork():** 
-- Used to create a new process (forking the execution line) at fork() by duplicating the existing one.
+Create a new process (forking the execution line) at `fork()` by duplicating the existing one.
 - The newly created process is called the child process.
 - The child process then executes along side the main process (the parent process) at the same time. 
-	- Let's say, we create a main(), and inside main(), somewhere we call fork().
-	- Launching main will give us two processes: main() executing; and when fork() is called, we have the child process duplicating and executing with the parent.
-- fork() returns us two process IDs (PID): of the main process, and of the child process (always 0). 
-	- The value returned is how we distinguish which is parent ( value > 0) and which is child (value == 0).
+	- Let's say, we create a `main()`, and inside `main()`, somewhere we call `fork()`.
+	- Launching main will give us two processes: `main()` executing; and when `fork()` is called, we have the child process duplicating and executing with the parent.
+- `fork()` returns us two process IDs (`PID`): of the main process, and of the child process (always 0). 
+	- The value returned is how we distinguish which is parent ( value > 0) and which is child (value == 0). 
+</td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-
-Syntax:
-```
-#include <unistd.h>
+```c
+<unistd.h>
 
 pid_t fork(void);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-- void
-
-Return value:
-- Returns a value in the parent process:
-	- On success, the process ID (PID) of the child process is returned in the parent.
-	- On failure, -1 is returned, and an error code is set in errno.
-- In the child process the return value is always 0.
-
-Example:
-```
+```c
 int main(void) 
 {
 	// Create a new child process by forking
@@ -643,10 +678,9 @@ int main(void)
 	return (0);
 }
 ```
-
-- What if we called fork() more than once in main?
-	- it will give us 2^n (two to the power of n) processes where n is the number of fork() system calls. 
-```
+- What if we called `fork()` more than once in main?
+	- it will give us 2^n (two to the power of n) processes where n is the number of `fork()` system calls. 
+```c
 int main(void) 
 {
 	fork(); 
@@ -658,7 +692,7 @@ int main(void)
 }
 ```
 - Output:
-```
+```bash
 Hello world!
 Hello world!
 Hello world!
@@ -668,36 +702,35 @@ Hello world!
 Hello world!
 Hello world!
 ```
+</td>
+		</tr>
+</table>
 
+<table>
+	<tr>
+		<th> 🔸 kill() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Ssend a signal to a process or a group of processes specified by the process ID </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-#### 🔸 **12. kill():** 
-- used to send a signal to a process or a group of processes specified by the process ID.
+```c
+<signal.h>
 
-Syntax:
-```
 int kill(pid_t pid, int sig)
-```
-Parameters:
-1. `pid`: 
-	- The process ID of the target process. It can take the following values:
-		- Positive PID: 
-			- Sends the signal to the process with the specified PID.
-		- `0`: 
-			- Sends the signal to all processes in the current process group.
-		- `-1`: 
-			- Sends the signal to all processes for which the calling process has permission to send signals, except for itself.
-		- Negative PID: 
-			- Sends the signal to all processes in the process group whose ID is the absolute value of pid.
-2. `int sig`: 
-	- This parameter is the signal number that you want to send. 
-	- It's an integer representing the specific signal you wish to use. 
-	- Common signals include SIGUSR1, SIGUSR2, SIGTERM, SIGKILL, and many more. 
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Return value:
-- The function returns 0 on success and -1 on error and sets errno to show that an error has occurred.
-
-Example:
-```
+```c
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
@@ -717,33 +750,35 @@ int main(void)
 	return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
-#### 🔸 **13. waitpid():** 
-- used to synchronize the parent and child processes.
+<table>
+	<tr>
+		<th> 🔸 waitpid() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Synchronize the parent and child processes </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Syntax: 
-```
-#include <sys/wait.h>
+```c
+<sys/wait.h>
 
 pid_t waitpid(pid_t pid, int *status, int options);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `pid`: 
-	- The process ID to wait for. 
-	- Use -1 to wait for any child process, or a specific PID to wait for a particular child process.
-2. `status`: 
-	- A pointer to an integer where the exit status of the child process will be stored.
-3. `options`: 
-	- Additional options for controlling the behavior of waitpid. 
-	- Commonly used options include WNOHANG (non-blocking) and WUNTRACED (report status of stopped child processes).
-
-Return value: 
-- On success, returns the process ID of the terminated child process.
-- On failure, returns -1, and sets errno to indicate the error.
-
-Example: 
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -772,42 +807,35 @@ int main(void)
 	return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
-#### 🔸 **14. sem_open():**
-- used for creating or opening a named semaphore. 
-- Semaphores are synchronization mechanisms that help coordinate access to shared resources or critical sections of code among multiple processes.
+<table>
+	<tr>
+		<th> 🔸 sem_open() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Create or open a named semaphore </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Syntax:
-```
-#include <semaphore.h>
+```c
+<semaphore.h>
 
 sem_t *sem_open(const char *name, int oflag, mode_t mode, unsigned int value);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `name`: 
-	- A string representing the name of the semaphore. 
-	- This can be a name that begins with a slash ('/') character or a name that does not contain a slash. 
-	- The name is used to identify the semaphore among processes.
-2. `oflag`: 
-	- The flags specifying the operation to be performed. 
-	- It can include one or more of the following:
-		- `O_CREAT`: Create the semaphore if it does not exist.
-		- `O_EXCL`: If O_CREAT is also specified and the semaphore already exists, return an error.
-		- `O_RDWR`: Open the semaphore for reading and writing.
-3. `mode`: 
-	- The file permissions to be set if `O_CREAT` is specified. 
-	- It is specified in octal mode (e.g., 0644).
-
-4. `value`: 
-	- The initial value for the semaphore.
-
-Return value:
-- On success, a pointer to the semaphore is returned.
-- On failure, SEM_FAILED is returned, and errno is set to indicate the error.
-
-Example:
-```
+```c
 #include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -834,27 +862,33 @@ int main(void)
     return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
-#### 🔸 **15. sem_close():** 
-- used to close a named semaphore that was previously opened with sem_open. Closing a semaphore is necessary to release system resources associated with the semaphore.
+<table>
+	<tr>
+		<th> 🔸 sem_close() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Close a named semaphore that was previously opened with sem_open() </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Syntax:
-```
-#include <semaphore.h>
+```c
 
-int sem_close(sem_t *sem);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `sem`: 
-	- A pointer to the semaphore object that you want to close.
-
-Return value:
-- Returns 0 on success.
-- Returns -1 on failure, and sets errno to indicate the error.
-
-Example:
-```
+```c
 #include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -881,29 +915,35 @@ int main(void)
     return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
+<table>
+	<tr>
+		<th> 🔸 sem_wait() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Decrement the value of the semaphore, blocking the calling thread if the semaphore's value is currently zero </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-#### 🔸 **16. sem_wait():** 
-- used to decrement the value of the semaphore, blocking the calling thread if the semaphore's value is currently zero. 
-- It is typically used to acquire access to a shared resource or to enter a critical section.
-
-Syntax:
-```
-#include <semaphore.h>
+```c
+<semaphore.h>
 
 int sem_wait(sem_t *sem);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `sem`: 
-	- A pointer to the semaphore object to wait on.
-
-Return value:
-- On success, sem_wait() returns 0.
-- On failure, it returns -1, and sets errno to indicate the error.
-
-Example:
-```
+```c
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -943,28 +983,35 @@ int main(void)
     return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
-#### 🔸 **17. sem_post():** 
-- used to increment the value of the semaphore, allowing other threads waiting on the semaphore to proceed. 
-- It is typically used to release a resource or signal the availability of a shared resource after it has been used.
+<table>
+	<tr>
+		<th> 🔸 sem_post() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Increment the value of the semaphore, allowing other threads waiting on the semaphore to proceed </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Syntax:
-```
-#include <semaphore.h>
+```c
+<semaphore.h>
 
 int sem_post(sem_t *sem);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `sem`: 
-	- A pointer to the semaphore object to be incremented.
-
-Return value:
-- On success, sem_post() returns 0.
-- On failure, it returns -1, and sets errno to indicate the error.
-
-Example:
-```
+```c
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -1004,28 +1051,35 @@ int main(void)
     return (0);
 }
 ```
+</td>
+		</tr>
+</table>
 
-#### 🔸 **18. sem_unlink():** 
-- used to unlink (delete) a named semaphore. 
+<table>
+	<tr>
+		<th> 🔸 sem_unlink() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Unlink (delete) a named semaphore </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Syntax:
-```
-#include <semaphore.h>
+```c
+<semaphore.h>
 
 int sem_unlink(const char *name);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `name`: 
-	- A pointer to a null-terminated string containing the name of the semaphore to be unlinked. 
-	- This name should follow the naming conventions specified by the system.
-
-Return value:
-- Returns 0 on success.
-- Returns -1 if an error occurs, and sets errno to indicate the error.
-
-Example:
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <semaphore.h>
@@ -1046,6 +1100,10 @@ int main(void)
     return (0);
 }
 ```
+</td>
+		</tr>
+</table>
+
 
 ## Evaluation Checklist:
 
