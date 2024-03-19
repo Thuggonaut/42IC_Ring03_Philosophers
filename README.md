@@ -208,11 +208,33 @@ int main(void)
 }
 ```
 
+<table><tbody>
+<tr>
+  <th> Left column </th>
+  <th> Right column </th>
+<tr>
+<tr>
+  <td>
+
+  * Just `write` **markdown**
+  * In _here_
+  </td>
+  <td>
+
+  ```python
+  def or_here():
+    pass
+  ```
+  </td>
+<tbody></table>
+
+
 | 🔸 memset() | |
 | --- | --- |
 | Use |  |
 | Library & Syntax |  |
 | Example |  |
+
 #### 🔸 **2. usleep():**
 - used to suspend the execution of a program to introduce a delay for a specified number of microseconds.
 
