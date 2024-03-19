@@ -28,24 +28,24 @@
 ## 1. 🔹 No global variables
 
 ## 2. 🔹 Your(s) program(s) should take the following arguments:
-### 1. 🔸 `number_of_philosophers`: 
-	- The number of philosophers and also 
-	- the number of forks.
-### 2. 🔸 `time_to_die` (in milliseconds): 
-	- If a philosopher didn’t start eating `time_to_die` milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
-### 3. 🔸 `time_to_eat` (in milliseconds): 
-	- The time it takes for a philosopher to eat.
-	- During that time, they will need to hold two forks.
-### 4. 🔸 `time_to_sleep` (in milliseconds): 
-	- The time a philosopher will spend sleeping.
-### 5. 🔸 `number_of_times_each_philosopher_must_eat` (optional argument): 
-	- If all philosophers have eaten at least `number_of_times_each_philosopher_must_eat` times, the simulation stops. 
-	- If not specified, the simulation stops when a philosopher dies.
+#### 1. 🔸 `number_of_philosophers`: 
+- The number of philosophers and also 
+- the number of forks.
+#### 2. 🔸 `time_to_die` (in milliseconds): 
+- If a philosopher didn’t start eating `time_to_die` milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
+#### 3. 🔸 `time_to_eat` (in milliseconds): 
+- The time it takes for a philosopher to eat.
+- During that time, they will need to hold two forks.
+#### 4. 🔸 `time_to_sleep` (in milliseconds): 
+- The time a philosopher will spend sleeping.
+#### 5. 🔸 `number_of_times_each_philosopher_must_eat` (optional argument): 
+- If all philosophers have eaten at least `number_of_times_each_philosopher_must_eat` times, the simulation stops. 
+- If not specified, the simulation stops when a philosopher dies.
 
 ## 3. 🔹 Each philosopher has a number ranging from `1` to `number_of_philosophers`.
 
 ## 4. 🔹 Philosopher number `1` sits next to philosopher number `number_of_philosophers`.
-	- Any other philosopher number `N` sits between philosopher number `N - 1` and philosopher number `N + 1`.
+- Any other philosopher number `N` sits between philosopher number `N - 1` and philosopher number `N + 1`.
 
 ## 5. 🔹 About the logs of your program:
 1. 🔸 Any state change of a philosopher must be formatted as follows:
