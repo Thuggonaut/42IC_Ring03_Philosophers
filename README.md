@@ -210,22 +210,18 @@ int main(void)
 
 <table><tbody>
 <tr>
-	<th> Function </th>
-	<th>	</th>
+  <th> Function </th>
+  <th>  </th>
 <tr>
 <tr>
-	<td>
+  <td>
 
-	* Just `write` **markdown**
-	* In _here_
-	</td>
-	<td>
+  Use
+  </td>
+  <td>
 
-	```python
-	def or_here():
-		pass
-	```
-	</td>
+  Initialize or clear blocks of memory to a specific value
+  </td>
 <tbody></table>
 
 
