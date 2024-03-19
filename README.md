@@ -211,7 +211,7 @@ int main(void)
 <table><tbody>
 <tr>
 	<th> Function </th>
-	<th> </th>
+	<th>	</th>
 <tr>
 <tr>
 	<td>
