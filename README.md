@@ -166,7 +166,10 @@ pthread_mutex_unlock(&mutex);
 | 🔸 memset() | |
 | --- | --- |
 | Use | Used to initialize or clear blocks of memory to a specific value |
-| Library & Syntax | <string.h> <br>`void *memset(void *ptr, int value, size_t num);` <br>Parameters:
+| Library & Syntax | 
+<string.h> 
+void *memset(void *ptr, int value, size_t num);`
+Parameters:
 1. `ptr`: 
 	- Pointer to the memory block to fill.
 2. `value`: 
@@ -208,28 +211,37 @@ int main(void)
 }
 ```
 
-<table><tbody>
-<tr>
-  <th> Function </th>
-  <th>  </th>
-<tr>
-<tr>
-  <td>
+<table>
+	<tr>
+		<th> 🔸 memset() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<td> Use </td>
+		<td> Initialize or clear blocks of memory to a specific value </td>
+	</tr>
+	<tr>
+		<td> Library & Syntax </td>
+		<td> 
 
-  Use
-  </td>
-  <td>
-
-  Initialize or clear blocks of memory to a specific value
-    <td>
-
-  Use
-  </td>
-  <td>
-
-  Initialize or clear blocks of memory to a specific value
-  </td>
-<tbody></table>
+		```c
+		<string.h>
+		void *memset(void *ptr, int value, size_t num);
+		```
+		Parameters:
+		1. `ptr`: 
+			- Pointer to the memory block to fill.
+		2. `value`: 
+			- Value to be set. 
+			- The value is passed as an int, but memset interprets it as an unsigned char, allowing you to set any byte value (0 to 255).
+		3. `num`: 
+			- Number of bytes to be set to the specified value.
+		Return value:
+			- A pointer to the memory area ptr.
+		</td>
+		<td> Example </td>
+  
+</table>
 
 
 | 🔸 memset() | |
