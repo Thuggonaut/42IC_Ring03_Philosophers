@@ -163,7 +163,7 @@ pthread_mutex_unlock(&mutex);
 17. sem_post
 18. sem_unlink
 
-| 🔸 **1. memset():** | |
+| 🔸 memset() | |
 | --- | --- |
 | Use |  |
 | Library & Syntax |  |
