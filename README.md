@@ -192,7 +192,7 @@ Return value:
 - A pointer to the memory area ptr.
 
 Example:
-```
+```c
 #include <stdio.h>
 #include <string.h>
 
@@ -210,8 +210,8 @@ int main(void)
 
 <table><tbody>
 <tr>
-  <th> Left column </th>
-  <th> Right column </th>
+  <th> Function </th>
+  <th>  </th>
 <tr>
 <tr>
   <td>
