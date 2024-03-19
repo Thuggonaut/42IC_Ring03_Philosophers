@@ -200,11 +200,11 @@ int main(void)
 		<th> </th>
 	</tr>
 	<tr>
-		<td> **Use** </td>
+		<th> Use </th>
 		<td> Initialize or clear blocks of memory to a specific value </td>
 	</tr>
 	<tr>
-		<td> **Library & Syntax** </td>
+		<td> Library & Syntax </td>
 		<td> 
 
 ```c
@@ -215,7 +215,7 @@ void *memset(void *ptr, int value, size_t num);
 </td>
 		</tr>
 		<tr>
-		<td> **Example** </td>
+		<td> Example </td>
   
 </table>
 
