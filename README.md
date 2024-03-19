@@ -109,10 +109,11 @@
 3. In main() Destroy the mutex when done;
 4. In thread function() Use the mutex to create the lock;
 5. In thread function() Release the lock when done executing;
-```
+```c
 pthread_mutex_t mutex; //Variable 'mutex'
 
-pthread_mutex_init(&mutex, NULL); //Initialize 'mutex' taking in a pointer to our mutex variable, and NULL (default configuration values)
+//Initialize 'mutex' taking in a pointer to our mutex variable, and NULL (default configuration values)
+pthread_mutex_init(&mutex, NULL);
 
 pthread_mutex_destroy(&mutex); //When we're done with it, destroy it
 
@@ -162,13 +163,13 @@ pthread_mutex_unlock(&mutex);
 17. sem_post
 18. sem_unlink
 
-| Function | |
+| 🔸 **1. memset():** | |
 | --- | --- |
 | Use |  |
 | Library & Syntax |  |
 | Example |  |
 
-#### 🔸 **1. memset():**
+#### 
 - Used to initialize or clear blocks of memory to a specific value
 
 Syntax:
