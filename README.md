@@ -25,9 +25,9 @@
 
 # 🔷 The Rules:
 
-### a. 🔹 No global variables
+### 1️⃣ No global variables
 
-### b. 🔹 Your(s) program(s) should take the following arguments:
+### 2️⃣ Your(s) program(s) should take the following arguments:
 #### 1. 🔸 `number_of_philosophers`: 
 - The number of philosophers and also 
 - the number of forks.
@@ -42,12 +42,12 @@
 - If all philosophers have eaten at least `number_of_times_each_philosopher_must_eat` times, the simulation stops. 
 - If not specified, the simulation stops when a philosopher dies.
 
-### c. 🔹 Each philosopher has a number ranging from `1` to `number_of_philosophers`.
+### 3️⃣ Each philosopher has a number ranging from `1` to `number_of_philosophers`.
 
-### d. 🔹 Philosopher number `1` sits next to philosopher number `number_of_philosophers`.
+### 4️⃣ Philosopher number `1` sits next to philosopher number `number_of_philosophers`.
 - Any other philosopher number `N` sits between philosopher number `N - 1` and philosopher number `N + 1`.
 
-### e. 🔹 About the logs of your program:
+### 5️⃣ About the logs of your program:
 1. 🔸 Any state change of a philosopher must be formatted as follows:
 - `timestamp_in_ms` X has taken a fork
 - `timestamp_in_ms` X is eating
