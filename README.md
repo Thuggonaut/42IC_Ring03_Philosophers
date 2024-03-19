@@ -195,17 +195,17 @@ int main(void)
 ```
 
 <table>
-	<tr>
-		<th> 🔸 memset() </th>
-		<th> </th>
-	</tr>
-	<tr>
-		<th> Use </th>
-		<td> Initialize or clear blocks of memory to a specific value </td>
-	</tr>
-	<tr>
-		<td> Library & Syntax </td>
-		<td> 
+  <tr>
+    <th> 🔸 memset() </th>
+    <th> </th>
+  </tr>
+  <tr>
+    <th> Use </th>
+    <td> Initialize or clear blocks of memory to a specific value </td>
+  </tr>
+  <tr>
+    <th> Library & Syntax </th>
+    <td> 
 
 ```c
 <string.h>
@@ -213,9 +213,9 @@ int main(void)
 void *memset(void *ptr, int value, size_t num);
 ``` 
 </td>
-		</tr>
-		<tr>
-		<td> Example </td>
+    </tr>
+    <tr>
+    <th> Example </th>
   
 </table>
 
