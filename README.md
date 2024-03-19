@@ -165,17 +165,20 @@ pthread_mutex_unlock(&mutex);
 
 | 🔸 memset() | |
 | --- | --- |
-| Use |  |
-| Library & Syntax |  |
+| Use | Used to initialize or clear blocks of memory to a specific value |
+| Library & Syntax | <string.h> <br>`void *memset(void *ptr, int value, size_t num);` <br>Parameters:
+1. `ptr`: 
+	- Pointer to the memory block to fill.
+2. `value`: 
+	- Value to be set. 
+	- The value is passed as an int, but memset interprets it as an unsigned char, allowing you to set any byte value (0 to 255).
+3. `num`: 
+	- Number of bytes to be set to the specified value.
+
+Return value:
+- A pointer to the memory area ptr.|
 | Example |  |
 
-#### 
-- Used to initialize or clear blocks of memory to a specific value
-
-Syntax:
-```
-void *memset(void *ptr, int value, size_t num);
-```
 Parameters:
 1. `ptr`: 
 	- Pointer to the memory block to fill.
@@ -205,6 +208,11 @@ int main(void)
 }
 ```
 
+| 🔸 memset() | |
+| --- | --- |
+| Use |  |
+| Library & Syntax |  |
+| Example |  |
 #### 🔸 **2. usleep():**
 - used to suspend the execution of a program to introduce a delay for a specified number of microseconds.
 
