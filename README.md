@@ -210,22 +210,22 @@ int main(void)
 
 <table><tbody>
 <tr>
-  <th> Function </th>
-  <th>  </th>
+	<th> Function </th>
+	<th> </th>
 <tr>
 <tr>
-  <td>
+	<td>
 
-  * Just `write` **markdown**
-  * In _here_
-  </td>
-  <td>
+	* Just `write` **markdown**
+	* In _here_
+	</td>
+	<td>
 
-  ```python
-  def or_here():
-    pass
-  ```
-  </td>
+	```python
+	def or_here():
+		pass
+	```
+	</td>
 <tbody></table>
 
 
