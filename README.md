@@ -164,20 +164,30 @@ pthread_mutex_unlock(&mutex);
 18. sem_unlink
 
 
-Return value:
-- A pointer to the memory area ptr.|
-| Example |  |
+<table>
+	<tr>
+		<th> 🔸 memset() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Initialize or clear blocks of memory to a specific value </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Parameters:
-1. `ptr`: 
-	- Pointer to the memory block to fill.
-2. `value`: 
-	- Value to be set. 
-	- The value is passed as an int, but memset interprets it as an unsigned char, allowing you to set any byte value (0 to 255).
-3. `num`: 
-	- Number of bytes to be set to the specified value.
+```c
+<string.h>
 
-Example:
+void *memset(void *ptr, int value, size_t num);
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
+
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -193,30 +203,8 @@ int main(void)
 	return (0);
 }
 ```
-
-<table>
-  <tr>
-    <th> 🔸 memset() </th>
-    <th> </th>
-  </tr>
-  <tr>
-    <th> Use </th>
-    <td> Initialize or clear blocks of memory to a specific value </td>
-  </tr>
-  <tr>
-    <th> Library & Syntax </th>
-    <td> 
-
-```c
-<string.h>
-
-void *memset(void *ptr, int value, size_t num);
-``` 
 </td>
-    </tr>
-    <tr>
-    <th> Example </th>
-  
+		</tr>
 </table>
 
 
