@@ -140,7 +140,7 @@ pthread_mutex_unlock(&mutex);
 ### 3️⃣ Each philosopher should be a process. But the main process should not be a philosopher.
 
 
-## External functions to learn:
+## 🔹 External functions to learn:
 
 1. memset
 2. usleep
@@ -153,7 +153,7 @@ pthread_mutex_unlock(&mutex);
 9. pthread_mutex_lock
 10. pthread_mutex_unlock
 
-## Bonus external functions:
+## 🔹 Bonus external functions:
 11. fork
 12. kill
 13. waitpid
@@ -207,23 +207,31 @@ int main(void)
 		</tr>
 </table>
 
+<table>
+	<tr>
+		<th> 🔸 usleep() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> Suspend the execution of a program to introduce a delay for a specified number of microseconds </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-#### 🔸 **2. usleep():**
-- used to suspend the execution of a program to introduce a delay for a specified number of microseconds.
+```c
+<unistd.h>
 
-Syntax:
-```
 int usleep(useconds_t microseconds);
-```
-Parameters:
-- `microseconds`:
-	- specifies the number of microseconds the program should sleep.
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Return Value:
-- Returns 0 if the execution was successful (execution successfully suspended) or -1 if there was an error.
-
-Example:
-```
+```c
 #include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
@@ -244,6 +252,38 @@ int main(void)
 	return (0);
 }
 ```
+</td>
+		</tr>
+</table>
+
+<table>
+	<tr>
+		<th> 🔸  </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td>  </td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
+
+```c
+
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
+
+```c
+
+```
+</td>
+		</tr>
+</table>
 
 #### 🔸 **3. gettimeofday():**
 - Used to obtain the current time
