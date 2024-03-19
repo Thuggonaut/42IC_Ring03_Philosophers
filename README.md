@@ -162,6 +162,12 @@ pthread_mutex_unlock(&mutex);
 17. sem_post
 18. sem_unlink
 
+| Function | |
+| --- | --- |
+| Use |  |
+| Library & Syntax |  |
+| Example |  |
+
 #### 🔸 **1. memset():**
 - Used to initialize or clear blocks of memory to a specific value
 
