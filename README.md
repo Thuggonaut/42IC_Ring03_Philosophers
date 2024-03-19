@@ -366,31 +366,40 @@ int main(void)
 		</tr>
 </table>
 
-
-#### 🔸 **5. pthread_detach():** 
-- Used to detach the newly created thread (thread_id). 
+<table>
+	<tr>
+		<th> 🔸 pthread_detach() </th>
+		<th> </th>
+	</tr>
+	<tr>
+		<th> Use </th>
+		<td> 
+		
+Detach the newly created thread (thread_id) 
 - This means that the resources associated with the thread will be automatically released when the thread exits, and the main thread does not need to explicitly join it.
 - The difference is, `pthread_join()` is used when you want the main thread to wait for the completion of a specific thread. 
 	- This is useful when the main thread needs the results produced by the other thread or when synchronization is necessary.
 - Whereas, `pthread_detach()` is used when you want to detach a thread and let it run independently. 
 	- The resources associated with the thread will be automatically released when the thread exits. 
 	- This is useful when you don't need to wait for the thread to finish and don't need its return value.
+</td>
+	</tr>
+	<tr>
+		<th> Library & Syntax </th>
+		<td> 
 
-Syntax:
-```
+```c
+<pthread.h>
+
 int pthread_detach(pthread_t thread_id);
-```
+``` 
+</td>
+		</tr>
+		<tr>
+		<th> Example </th>
+		<td>
 
-Parameters:
-1. `thread_id`: 
-	- The ID of the thread to be joined.
-
-Return value:
-- If successful, pthread_detach returns 0.
-- If an error occurs, a non-zero error code is returned.
-
-Example:
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -421,6 +430,11 @@ int main(void)
 	return (0);
 }
 ```
+</td>
+		</tr>
+</table>
+
+
 
 #### 🔸 **6. pthread_join():** 
 - Used to wait for the thread with ID thread_id to finish its execution.
