@@ -1105,16 +1105,16 @@ int main(void)
 </table>
 
 
-## Evaluation Checklist:
+# 🔷 Evaluation Checklist:
 
-**Error Handling:**
+🔸 **Error Handling:**
 1. Does not crash or have undefined behaviour.
 2. Does not have memory leaks.
 3. No norm errors.
 4. No global variables.
 5. Defend if the program doesn't work on slower machines.
 
-**Code checks and rationale for each:**
+🔸 **Code checks and rationale for each:**
 1. There is one thread per philosopher.
 2. There is one fork per philosopher.
 3. There is a mutex per fork. The mutex is used to check the fork value and/or change it.
@@ -1122,7 +1122,7 @@ int main(void)
 5. The death of a philospher can be checked.
 6. There is a mutex to protect when a philosopher dies and starts eating at the same time.
 
-**Testing:**
+🔸 **Testing:**
 1. Should not test with more than 200 philosphers.
 2. Should not test when either `time_to_die`, `time_to_eat` or `time_to_sleep` is under 60`ms`.
 3. Test with `1 800 200 200`: the philosopher should not eat and should die.
@@ -1133,7 +1133,7 @@ int main(void)
 8. Test with 2 philosphers and che the different times: a death delayed by more than 10 ms is unacceptable.
 9. Test with any values of your choice to verify all the requirements. Ensure philosophers die at the right time, that they don't steal forks, etc.
 
-**BONUS code checks and rationale for each:**
+🔸 **BONUS code checks and rationale for each:**
 1. There is one process per philosopher and the main process is not a philosopher (the first process waits for all philosopher processes?).
 2. There are no orphan processes at the end of the execution of this program.
 3. There is a single semaphore that represents the number of forks.
@@ -1141,7 +1141,7 @@ int main(void)
 5. The death of a philospher can be checked.
 6. There is a semaphore to prevent a philosopher from dying and starts eating at the same timee.
 
-**BONUS testing:**
+🔸 **BONUS testing:**
 1. Should not test with more than 200 philosphers.
 2. Should not test when either `time_to_die`, `time_to_eat` or `time_to_sleep` is under 60`ms`.
 3. Test 5 800 200 200. No philosopher should die.
@@ -1152,7 +1152,7 @@ int main(void)
 8. Test with any values of your choice to verify all the requirements. Ensure philosophers die at the right time, that they don't steal forks, etc.
 
 
-# References:
+# 🔷 References:
 
 [Introduction To Threads (pthreads)](https://www.youtube.com/watch?v=ldJ8WGZVXZk
 - An introduction on how to use threads in C with the pthread.h library (POSIX thread library).)

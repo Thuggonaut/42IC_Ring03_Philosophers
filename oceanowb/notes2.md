@@ -10,4 +10,5 @@
 	- An array of structs
 - A fork is a mutex.
 	- An array of mutexes.
- 
+
+19:54m
