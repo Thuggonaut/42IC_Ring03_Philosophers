@@ -16,7 +16,9 @@
 
 
 //CUSTOM MACROS
-# define PH_MAX 200 
+# define PH_MAX 200
+# define INPUT_ERROR 1
+# define MALLOC_ERROR 2
 
 
 //ANSI Escape Sequences for text formatting*****
@@ -31,7 +33,6 @@
 //DATA STRUCTS*****
 
 //Define types here to use their shortened name throughout our codes
-//typedef struct s_data	t_data;
 typedef pthread_mutex_t	t_mtx; //To represent each fork
 
 //For each fork
@@ -68,18 +69,60 @@ typedef struct s_data
 	//bool			all_threads_ready;
 	//long			threads_running_nbr;
 	//pthread_t		monitor;
-	t_fork			*fork_arr; //Pointer to the forks/mutex array
+	t_fork			*forks_arr; //Pointer to the forks/mutex array
 	t_ph			*philos_arr; //Pointer to the philos array
 	//t_mtx			data_mutex;
 	//t_mtx			write_mutex;
 }					t_data;
 
 
-//PARSING*****
+//ENUMS*****
+//Enums allow you to define a set of named integer constants. Giving them symbolic names is clearer than going by numbers
+//Each enumerator name represents a constant value, assigned by the compiler (unless explicitly specified), starting from 0 and incrementing by 1 for each subsequent enumerator
+
+//For representing a philosoper's state during a simulation, and used for printing to the STDOUT
+typedef enum e_status
+{
+	THINKING,
+	TAKES_FORK,
+	TAKES_FORK,
+	EATING,
+	SLEEPING,
+	DIED,
+}			t_ph_status;
+
+//For representing units of time for measuring durations with gettime()
+typedef enum e_time_code
+{
+	SECONDS,
+	MILLISECONDS,
+	MICROSECONDS,
+}		t_time_code;
+
+//For representing thread and mutex functions for cleaner readability. Used with threads_mutex.c
+typedef enum e_ftcode
+{
+	INIT,
+	CREATE,
+	LOCK,
+	UNLOCK,
+	JOIN,
+	DETACH,
+	DESTROY,
+}			t_ftcode;
+
+
+//SIMULATION*****
 void		parse_input(t_data *data, char **argv);
+void		data_init(t_data *data);
+
+
+//THREADS & MUTEXES HANDLERS*****
+void		handle_mutex(t_mtx *mtx, t_ftcode ftcode);
 
 
 //UTILS*****
+void		*ft_malloc(size_t bytes);
 void		error_exit(const char *error_msg);
 
 #endif

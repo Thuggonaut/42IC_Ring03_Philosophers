@@ -153,6 +153,9 @@ pthread_mutex_unlock(&mutex);
 9. pthread_mutex_lock
 10. pthread_mutex_unlock
 
+Also permitted:
+printf, malloc, free, write
+
 ## 🔹 Bonus external functions:
 11. fork
 12. kill
@@ -163,6 +166,8 @@ pthread_mutex_unlock(&mutex);
 17. sem_post
 18. sem_unlink
 
+Also permitted:
+printf, malloc, free, write, exit
 
 <table>
 	<tr>
