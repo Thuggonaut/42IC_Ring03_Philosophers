@@ -1,5 +1,42 @@
 #include "philo.h"
 
+//Define a function that assigns left and right forks for each philo
+static void	takes_forks(t_ph *philo, t_fork *forks_arr, int ph_index)
+{
+	int	ph_total;
+
+	ph_total = philo->data->ph_total;
+	//If ph_index is odd
+	philo->left_fork = &forks_arr[(ph_index + 1) % ph_total];
+	philo->right_fork = &forks_arr[ph_index];
+	//If ph_index is even
+	if (philo->ph_id % 2 == 0)
+	{
+		philo->right_fork = &forks_arr[ph_index];
+		philo->left_fork = &forks_arr[(ph_index + 1) % ph_total];
+	}	
+}
+
+//Defina a funtion to initialize each philo
+static void	philo_init(t_data *data)
+{
+	int		i; //To track the loop count
+	t_ph	*philo; //A pointer variable for each philo struct 
+
+	i = 0;
+	while (i < data->ph_total)  //Iterate up to ph_total times
+	{
+		philo = data->philos_arr + i; //Assign to the current philo, the address of the i'th position of the array
+		philo->ph_id = i + 1; //Assign to the current philo, an ID (starting from `1`)
+		philo->max_meals = false; //**************Where does this change if true*************
+		philo->meal_count = 0; //The philo hasn't eaten yet
+		//handle_mutex(&philo->ph_mutex, INIT); //
+		philo->data = data;
+		takes_forks(philo, data->forks_arr, i);
+		i++;
+	}
+}
+
 //Define a function to initialize the data structs needed for simulation, taking a pointer to the t_data struct
 void	data_init(t_data *data)
 {
@@ -9,15 +46,15 @@ void	data_init(t_data *data)
 	data->end_time = false; //Ensure that the simulation starts in an active state (simulation has not ended)
 	//data->all_threads_ready = false;
 	//data->threads_running_nbr = 0;
-	data->philos_arr = ft_malloc(data->ph_total * sizeof(t_ph));
-	data->forks_arr = ft_malloc(data->ph_total * sizeof(t_fork));
-	//safe_mutex_handle(&data->write_mutex, INIT);
-	//safe_mutex_handle(&data->data_mutex, INIT);
-	while (i < data->ph_total)
+	data->philos_arr = ft_malloc(data->ph_total * sizeof(t_ph)); //Allocate memory for the philos/thread array
+	data->forks_arr = ft_malloc(data->ph_total * sizeof(t_fork)); //Allocate memory for the forks/mutex array
+	//handle_mutex(&data->write_mutex, INIT);
+	//handle_mutex(&data->data_mutex, INIT);
+	while (i < data->ph_total) //Iterate up to ph_total times
 	{
-		safe_mutex_handle(&data->forks_arr[i].fork, INIT);
-		data->forks_arr[i].fork_id = i;
-		i++;
+		handle_mutex(&data->forks_arr[i].fork, INIT); //Initialize the mutex for each fork in the fork mutex array
+		data->forks_arr[i].fork_id = i; //For each fork/mutex, set the fork_id value
+		i++; //Move to the next fork/mutex
 	}
 	philo_init(data);
 }

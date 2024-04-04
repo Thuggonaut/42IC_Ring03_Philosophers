@@ -11,6 +11,4 @@
 - A fork is a mutex.
 	- An array of mutexes.
 
-38:44
-enums for time
-read about gettimeofday() and the purpose of the enum
+44:50

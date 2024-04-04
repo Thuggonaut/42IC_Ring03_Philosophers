@@ -52,7 +52,7 @@ typedef struct s_ph
 	pthread_t	ph_thread; //Identifier of the thread representing the philo to manage thread operations
 	t_fork		*left_fork; //Pointer to left fork in the mutex array
 	t_fork		*right_fork; //Pointer to right fork in the mutex array
-	//t_mtx		philo_mutex;
+	//t_mtx		ph_mutex;
 	t_data		*data; //Allow each philo access to the simulation data
 }				t_ph;
 
@@ -119,6 +119,7 @@ void		data_init(t_data *data);
 
 //THREADS & MUTEXES HANDLERS*****
 void		handle_mutex(t_mtx *mtx, t_ftcode ftcode);
+void		handle_thread(pthread_t *thread_info, void *(*foo)(void *), void *t_data, t_ftcode ftcode);
 
 
 //UTILS*****

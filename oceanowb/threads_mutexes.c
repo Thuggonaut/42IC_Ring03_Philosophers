@@ -30,15 +30,15 @@ void	handle_mutex(t_mtx *mtx, t_ftcode ftcode)
 } 
 
 //Define a wrap around function that handles the thread functions for simplification and readability
-void	handle_thread(pthread_t *thread, void *(*foo)(void *),
-		void *data, t_ftcode ftcode)
+void	handle_thread(pthread_t *thread_info, void *(*foo)(void *),
+		void *t_data, t_ftcode ftcode)
 {
 	if (ftcode == CREATE)
-		thread_error_check(pthread_create(thread, NULL, foo, data), ftcode);
+		thread_error_check(pthread_create(thread_info, NULL, foo, t_data), ftcode);
 	else if (ftcode == JOIN)
-		thread_error_check(pthread_join(*thread, NULL), ftcode);
+		thread_error_check(pthread_join(*thread_info, NULL), ftcode);
 	else if (ftcode == DETACH)
-		thread_error_check(pthread_detach(*thread), ftcode);
+		thread_error_check(pthread_detach(*thread_info), ftcode);
 	else
 		error_exit("ftcode options: CREATE, JOIN, DETACH");
 }

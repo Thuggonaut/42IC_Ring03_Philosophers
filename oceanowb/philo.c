@@ -7,7 +7,7 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6) //Check for correct number of input arguments, if so, execute the following
 	{
 		parse_input(&data, argv);
-		data_init(&data); //TODO
+		data_init(&data);
 		sim_start(&data); //TODO
 		clean(&data); //TODO
 	}
