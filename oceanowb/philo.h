@@ -52,7 +52,7 @@ typedef struct s_ph
 	pthread_t	ph_thread; //Identifier of the thread representing the philo to manage thread operations
 	t_fork		*left_fork; //Pointer to left fork in the mutex array
 	t_fork		*right_fork; //Pointer to right fork in the mutex array
-	//t_mtx		ph_mutex;
+	t_mtx		ph_mutex; //TODO comment
 	t_data		*data; //Allow each philo access to the simulation data
 }				t_ph;
 
@@ -66,13 +66,13 @@ typedef struct s_data
 	long			meals_total; //Track if there is a fifth argument `number_of_times_each_philosopher_must_eat`. If not, assign `-1` indicating it has not been set
 	long			start_time; //Track when the simulation starts
 	bool			end_time; //Track when the simulation ends (when a philo dies, or when all philos have eaten number of `meals_total`)
-	//bool			all_threads_ready;
-	//long			threads_running_nbr;
-	//pthread_t		monitor;
+	bool			threads_ready; //TODO comment
+	//long			threads_running_nbr; //TODO comment
+	//pthread_t		monitor; //TODO comment
 	t_fork			*forks_arr; //Pointer to the forks/mutex array
 	t_ph			*philos_arr; //Pointer to the philos array
-	//t_mtx			data_mutex;
-	//t_mtx			write_mutex;
+	t_mtx			bool_access_mutex; //Controll access to bool values by multiple threads, avoiding data races
+	//t_mtx			write_mutex; //TODO comment
 }					t_data;
 
 
@@ -115,11 +115,16 @@ typedef enum e_ftcode
 //SIMULATION*****
 void		parse_input(t_data *data, char **argv);
 void		data_init(t_data *data);
+void		sim_start(t_data *data);
 
 
 //THREADS & MUTEXES HANDLERS*****
 void		handle_mutex(t_mtx *mtx, t_ftcode ftcode);
 void		handle_thread(pthread_t *thread_info, void *(*foo)(void *), void *t_data, t_ftcode ftcode);
+void		set_bool(t_mtx	*mutex, bool *dst, bool value);
+bool		get_bool(t_mtx *mutex, bool *value);
+void		set_long(t_mtx *mutex, long *dst, long value);
+long		get_long(t_mtx *mutex, long *value);
 
 
 //UTILS*****

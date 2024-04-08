@@ -2,12 +2,12 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data	data; //TODO comment
 
 	if (argc == 5 || argc == 6) //Check for correct number of input arguments, if so, execute the following
 	{
-		parse_input(&data, argv);
-		data_init(&data);
+		parse_input(&data, argv); //Parse the input and convert the strings to their required integer values
+		data_init(&data); //Initialise the data, philo and forks arrays for simulation
 		sim_start(&data); //TODO
 		clean(&data); //TODO
 	}
