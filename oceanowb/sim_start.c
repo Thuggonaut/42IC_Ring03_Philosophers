@@ -6,10 +6,10 @@ static void	*dining_philos(void *data)
 	t_ph	*philo; //A pointer variable for each philo struct 
 
 	philo = (t_ph *)data;
-	wait_all_threads(philo->data); //TODO comment
+	wait_all_threads(philo->data); //Wait for `threads_ready` to become true
 	set_long(&philo->ph_mutex, &philo->meal_time,
 		gettime(MILLISECONDS));
-	increase_long(&philo->data->bool_access_mutex,
+	increase_long(&philo->data->access_mutex,
 		&philo->data->threads_running_nbr);
 	de_synchronize_philos(philo);
 	while (!simulation_finished(philo->data))
@@ -27,7 +27,7 @@ static void	*dining_philos(void *data)
 //Define a function to start the simulation following data initialization
 void	sim_start(t_data *data)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	if (data->meals_total == 0) //If the optional argument is `0`, return to main()
@@ -39,12 +39,12 @@ void	sim_start(t_data *data)
 		while (i++ < data->ph_total)
 			handle_thread(&data->philos_arr[i].ph_thread, dining_philos,
 				&data->philos_arr[i], CREATE);
-	handle_thread(&data->monitor, monitor_dinner, data, CREATE); 
-	data->start_time = gettime(MILLISECONDS);
-	set_bool(&data->bool_access_mutex, &data->threads_ready, true); //TODO comment: set to true after all the threads are ready to start
+	//handle_thread(&data->monitor, monitor_dinner, data, CREATE); 
+	data->start_time = gettime(MILLISECONDS); //Obtain the start time in milliseconds as required
+	set_bool(&data->access_mutex, &data->threads_ready, true); //Set to true to indicate all the threads are ready to start
 	i = 0;
 	while (i++ < data->ph_total)
 		handle_thread(&data->philos_arr[i].ph_thread, NULL, NULL, JOIN);
-	set_bool(&data->bool_access_mutex, &data->end_time, true); //TODO comment
+	set_bool(&data->access_mutex, &data->end_time, true); //TODO comment
 	handle_thread(&data->monitor, NULL, NULL, JOIN);
 }

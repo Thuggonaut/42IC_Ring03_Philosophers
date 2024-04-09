@@ -71,7 +71,7 @@ typedef struct s_data
 	//pthread_t		monitor; //TODO comment
 	t_fork			*forks_arr; //Pointer to the forks/mutex array
 	t_ph			*philos_arr; //Pointer to the philos array
-	t_mtx			bool_access_mutex; //Controll access to bool values by multiple threads, avoiding data races
+	t_mtx			access_mutex; //Controll access to bool values by multiple threads, avoiding data races
 	//t_mtx			write_mutex; //TODO comment
 }					t_data;
 
@@ -92,12 +92,12 @@ typedef enum e_status
 }			t_ph_status;
 
 //For representing units of time for measuring durations with gettime()
-typedef enum e_time_code
+typedef enum e_time_unit
 {
 	SECONDS,
 	MILLISECONDS,
 	MICROSECONDS,
-}		t_time_code;
+}		t_time_unit;
 
 //For representing thread and mutex functions for cleaner readability. Used with threads_mutex.c
 typedef enum e_ftcode
@@ -121,6 +121,7 @@ void		sim_start(t_data *data);
 //THREADS & MUTEXES HANDLERS*****
 void		handle_mutex(t_mtx *mtx, t_ftcode ftcode);
 void		handle_thread(pthread_t *thread_info, void *(*foo)(void *), void *t_data, t_ftcode ftcode);
+void		wait_all_threads(t_data *data);
 void		set_bool(t_mtx	*mutex, bool *dst, bool value);
 bool		get_bool(t_mtx *mutex, bool *value);
 void		set_long(t_mtx *mutex, long *dst, long value);
@@ -130,5 +131,6 @@ long		get_long(t_mtx *mutex, long *value);
 //UTILS*****
 void		*ft_malloc(size_t bytes);
 void		error_exit(const char *error_msg);
+long		gettime(t_time_unit time_unit);
 
 #endif

@@ -65,9 +65,9 @@ bool	get_bool(t_mtx *mutex, bool *value)
 //Define a function to safely set the value of a long integer variable from the data structs
 void	set_long(t_mtx *mutex, long *dst, long value)
 {
-	safe_mutex_handle(mutex, LOCK);
+	handle_mutex(mutex, LOCK);
 	*dst = value;
-	safe_mutex_handle(mutex, UNLOCK);
+	handle_mutex(mutex, UNLOCK);
 }
 
 //Define a function to safely retrieve the value of a long integer variable 

@@ -50,7 +50,7 @@ void	data_init(t_data *data)
 	data->philos_arr = ft_malloc(data->ph_total * sizeof(t_ph)); //Allocate memory for the philos/thread array
 	data->forks_arr = ft_malloc(data->ph_total * sizeof(t_fork)); //Allocate memory for the forks/mutex array
 	//handle_mutex(&data->write_mutex, INIT); //TODO comment
-	handle_mutex(&data->bool_access_mutex, INIT); //Initialize the mutex before threads can access to bool values
+	handle_mutex(&data->access_mutex, INIT); //Initialize the mutex before threads can access to bool values
 	while (i++ < data->ph_total) //Iterate up to ph_total times, begining with [0]
 	{
 		handle_mutex(&data->forks_arr[i].fork, INIT); //Initialize the mutex for each fork in the fork mutex array
