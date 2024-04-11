@@ -132,5 +132,6 @@ long		get_long(t_mtx *mutex, long *value);
 void		*ft_malloc(size_t bytes);
 void		error_exit(const char *error_msg);
 long		gettime(t_time_unit time_unit);
+void		ft_usleep(long sleep_time, t_data *data);
 
 #endif

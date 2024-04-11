@@ -50,3 +50,34 @@ long	gettime(t_time_unit time_unit)
 		error_exit("Invalid time unit specified");
 	return (-1); //The compiler needs a return statement but it will never be reached, as `error_exit` will terminate the program
 }
+
+//Define own usleep() function to more accurately delay execution (sleep duration)
+//Default usleep() otherwise can vary depending on the operating system
+void	ft_usleep(long sleep_time, t_data *data)
+{
+	long	start; //To store the current time when the function starts executing
+	long	elapsed; //To store the elapsed time since the execution start
+	long	remaining; //To store the remaining time to sleep
+
+	start = gettime(MICROSECONDS); //Retrieve the start time, from which the elapsed is measured
+	while (gettime(MICROSECONDS) - start < sleep_time) //Loop until elapsed time is >= than time to sleep, ensuring a waiting state
+	{
+		if (get_bool(&data->access_mutex, &data->end_time)) //If the simulation ended, there's no need to continue waiting
+			break ; //Exit function
+		elapsed = gettime(MICROSECONDS) - start;
+		remaining = sleep_time - elapsed; //Calculate the remaining time to sleep
+		if (remaining > 10000) //If remaining time is more than 10 milliseconds
+			usleep(remaining / 2); //Sleep for half of the remaining time. See #1
+		else //If remaining time is less than 10 milliseconds
+			while (gettime(MICROSECONDS) - start < sleep_time) //Continuously wait until the sleep time is reached
+				;
+	}
+}
+
+/*
+NOTES:
+
+#1
+Sleeping for half the remaining time reduces the chances of overshooting the desired sleep duration. 
+	- This ensures the program wakes up to resume execution closer to the intended time (halfway through the remaining time).
+*/

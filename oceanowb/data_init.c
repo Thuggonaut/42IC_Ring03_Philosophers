@@ -26,7 +26,7 @@ static void	philo_init(t_data *data)
 	t_ph	*philo; //A pointer variable for each philo struct 
 
 	i = 0;
-	while (i++ < data->ph_total)  //Iterate up to ph_total times begining with [0]
+	while (i < data->ph_total)  //Iterate up to ph_total times begining with [0]
 	{
 		philo = data->philos_arr + i; //Assign to the current philo, the address of the i'th position of the array
 		philo->ph_id = i + 1; //Assign to the current philo, an ID (starting from `1`)
@@ -35,6 +35,7 @@ static void	philo_init(t_data *data)
 		//handle_mutex(&philo->ph_mutex, INIT); //TODO comment
 		philo->data = data;
 		assign_forks(philo, data->forks_arr, i);
+		i++;
 	}
 }
 
@@ -51,10 +52,11 @@ void	data_init(t_data *data)
 	data->forks_arr = ft_malloc(data->ph_total * sizeof(t_fork)); //Allocate memory for the forks/mutex array
 	//handle_mutex(&data->write_mutex, INIT); //TODO comment
 	handle_mutex(&data->access_mutex, INIT); //Initialize the mutex before threads can access to bool values
-	while (i++ < data->ph_total) //Iterate up to ph_total times, begining with [0]
+	while (i < data->ph_total) //Iterate up to ph_total times, begining with [0]
 	{
 		handle_mutex(&data->forks_arr[i].fork, INIT); //Initialize the mutex for each fork in the fork mutex array
 		data->forks_arr[i].fork_id = i; //For each fork/mutex, set the fork_id value
+		i++;
 	}
 	philo_init(data);
 }
