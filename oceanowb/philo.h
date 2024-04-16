@@ -4,8 +4,7 @@
 //LIBRARIES*****
 # include <stdio.h> //To call printf() for printing to the STDOUT
 # include <stdlib.h> //To call malloc(), free() for memory management
-//# include <stdint.h> 
-//# include <sys/wait.h>
+# include <sys/wait.h> //To call waitpid()
 # include <unistd.h> //To call write(), usleep()
 # include <stdbool.h> //To use boolean values
 # include <errno.h> //To access various error codes during execution
@@ -28,6 +27,7 @@
 # define YELLOW		"\033[1;33m"
 # define MAGENTA	"\033[1;35m"
 # define CYAN		"\033[1;36m"
+# define WHITE		"\033[1;37m"
 
 
 //DATA STRUCTS*****
@@ -52,7 +52,7 @@ typedef struct s_ph
 	pthread_t	ph_thread; //Identifier of the thread representing the philo to manage thread operations
 	t_fork		*left_fork; //Pointer to left fork in the mutex array
 	t_fork		*right_fork; //Pointer to right fork in the mutex array
-	t_mtx		ph_mutex; //TODO comment
+	t_mtx		ph_mutex; //Mutex to allow one thread (philo) to access critical sections (variables) at a time
 	t_data		*data; //Allow each philo access to the simulation data
 }				t_ph;
 
@@ -72,7 +72,7 @@ typedef struct s_data
 	t_fork			*forks_arr; //Pointer to the forks/mutex array
 	t_ph			*philos_arr; //Pointer to the philos array
 	t_mtx			access_mutex; //Controll access to bool values by multiple threads, avoiding data races
-	//t_mtx			write_mutex; //TODO comment
+	t_mtx			write_mutex; //Control thread access, allowing one at a time to write to the STDOUT
 }					t_data;
 
 
@@ -84,8 +84,8 @@ typedef struct s_data
 typedef enum e_status
 {
 	THINKING,
-	TAKES_FORK,
-	TAKES_FORK,
+	TAKES_LEFTFORK,
+	TAKES_RIGHTFORK,
 	EATING,
 	SLEEPING,
 	DIED,
@@ -133,5 +133,6 @@ void		*ft_malloc(size_t bytes);
 void		error_exit(const char *error_msg);
 long		gettime(t_time_unit time_unit);
 void		ft_usleep(long sleep_time, t_data *data);
+void		ph_status(t_ph_status status, t_ph *philo);
 
 #endif

@@ -50,7 +50,7 @@ void	data_init(t_data *data)
 	//data->threads_running_nbr = 0; //TODO comment
 	data->philos_arr = ft_malloc(data->ph_total * sizeof(t_ph)); //Allocate memory for the philos/thread array
 	data->forks_arr = ft_malloc(data->ph_total * sizeof(t_fork)); //Allocate memory for the forks/mutex array
-	//handle_mutex(&data->write_mutex, INIT); //TODO comment
+	handle_mutex(&data->write_mutex, INIT); //Initialize the mutex that controlls thread access to write to the STDOUT
 	handle_mutex(&data->access_mutex, INIT); //Initialize the mutex before threads can access to bool values
 	while (i < data->ph_total) //Iterate up to ph_total times, begining with [0]
 	{
