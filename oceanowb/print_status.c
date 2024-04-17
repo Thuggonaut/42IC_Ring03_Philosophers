@@ -25,11 +25,11 @@ void	ph_status(t_ph_status status, t_ph *philo)
 	else //Print the log based on the status of the philo and if the simulation has not ended
 	{
 		handle_mutex(&philo->data->write_mutex, LOCK); //Lock before printing to ensure thread safety
-		end_time = get_bool(&philo->data->access_mutex, &philo->data->end_time);
+		end_time = get_bool(&philo->data->access_mutex, &philo->data->end_time); //Retrieve the value of `end_time`
 		if ((status == TAKES_LEFTFORK || status == TAKES_RIGHTFORK) && !end_time)
-			printf(WHITE"%-6ld"RESET" %d has taken a fork\n", elapsed, philo->ph_id);
+			printf(WHITE"%-6ld"RESET" %d has taken a fork\n", elapsed, philo->ph_id); //See note #1 for `%-61d`
 		else if (status == EATING && !end_time)
-			printf(WHITE"%-6ld"CYAN" %d is eating\n"RESET, elapsed, philo->ph_id);
+			printf(WHITE"%-6ld"GREEN" %d is eating\n"RESET, elapsed, philo->ph_id);
 		else if (status == SLEEPING && !end_time)
 			printf(WHITE"%-6ld"RESET" %d is sleeping\n", elapsed, philo->ph_id);
 		else if (status == THINKING && !end_time)
@@ -37,5 +37,15 @@ void	ph_status(t_ph_status status, t_ph *philo)
 		else if (status == DIED)
 			printf(RED"%-6ld %d died\n"RESET, elapsed, philo->ph_id);
 	}
-	handle_mutex(&philo->data->write_mutex, UNLOCK);
+	handle_mutex(&philo->data->write_mutex, UNLOCK); //Unlock for the next thread to access
 }
+
+/*
+NOTES:
+
+#1	
+`%ld` is a format specifier used for printing a long integer.
+	- `-6` is a width specifier that ensures the printed number occupies at least 6 characters, left-aligning the output. 
+	- If the number is less than 6 characters, spaces will be added to the right to meet the width requirement.
+	- Makes the output easier to read when aligned.
+*/
