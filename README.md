@@ -1153,7 +1153,7 @@ int main(void)
 4. Test with `5 800 200 200 7`: no one should die, and the simulation should stop when all the philosophers has eaten at least 7 times each.
 5. Test with `4 410 200 200`: no one should die.
 6. Test with `4 310 200 100`: one philosopher should die.
-7. Test with 2 philosphers and che the different times: a death delayed by more than 10 ms is unacceptable.
+7. Test with 2 philosphers and check the different times: a death delayed by more than 10 ms is unacceptable.
 8. Test with any values of your choice to verify all the requirements. Ensure philosophers die at the right time, that they don't steal forks, etc.
 
 

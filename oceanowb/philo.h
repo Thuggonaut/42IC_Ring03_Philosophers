@@ -7,7 +7,6 @@
 # include <sys/wait.h> //To call waitpid()
 # include <unistd.h> //To call write(), usleep()
 # include <stdbool.h> //To use boolean values
-# include <errno.h> //To access various error codes during execution
 # include <string.h> //To call memset()
 # include <pthread.h> //For thread related functions
 # include <sys/time.h> //To call gettimeofday()
@@ -38,7 +37,7 @@ typedef pthread_mutex_t	t_mtx; //To represent each fork
 //For each fork
 typedef struct s_fork
 {
-	t_mtx		fork; //Declare a mutex for each fork
+	t_mtx		fork_mutex; //Declare a mutex for each fork
 	int			fork_id; //Declare a variable for the fork number
 }				t_fork;
 

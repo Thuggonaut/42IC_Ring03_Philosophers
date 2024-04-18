@@ -32,10 +32,10 @@ static void	philo_init(t_data *data)
 		philo->ph_id = i + 1; //Assign to the current philo, an ID (starting from `1`)
 		philo->max_meals = false; //**************Where does this change if true************* //TODO comment
 		philo->meal_count = 0; //The philo hasn't eaten yet
-		//handle_mutex(&philo->ph_mutex, INIT); //TODO comment
-		philo->data = data;
-		assign_forks(philo, data->forks_arr, i);
-		i++;
+		handle_mutex(&philo->ph_mutex, INIT); //Initialize the philo's mutex to allow one thread (philo) to access critical sections (variables, e.g. meal_time) at a time
+		philo->data = data; //TODO comment
+		assign_forks(philo, data->forks_arr, i); //TODO comment
+		i++; 
 	}
 }
 
@@ -58,7 +58,7 @@ void	data_init(t_data *data)
 		data->forks_arr[i].fork_id = i; //For each fork/mutex, set the fork_id value
 		i++;
 	}
-	philo_init(data);
+	philo_init(data); //TODO comment
 }
 
 /*
