@@ -15,8 +15,6 @@
 
 //CUSTOM MACROS
 # define PH_MAX 200
-# define INPUT_ERROR 1
-# define MALLOC_ERROR 2
 
 
 //ANSI Escape Sequences for text formatting*****
@@ -30,8 +28,9 @@
 
 
 //DATA STRUCTS*****
+typedef struct s_data	t_data; //Forward declaration because `t_ph` first references `t_data` before being defined
 
-//Define types here to use their shortened name throughout our codes
+//Define t_mtx here to use its shortened name throughout our codes
 typedef pthread_mutex_t	t_mtx; //To represent each fork
 
 //For each fork
@@ -67,7 +66,7 @@ typedef struct s_data
 	bool			end_time; //Track when the simulation ends (when a philo dies, or when all philos have eaten number of `meals_total`)
 	bool			threads_ready; //TODO comment
 	//long			threads_running_nbr; //TODO comment
-	//pthread_t		monitor; //TODO comment
+	pthread_t		monitor; //TODO comment
 	t_fork			*forks_arr; //Pointer to the forks/mutex array
 	t_ph			*philos_arr; //Pointer to the philos array
 	t_mtx			access_mutex; //Controll access to bool values by multiple threads, avoiding data races
@@ -129,7 +128,7 @@ long		get_long(t_mtx *mutex, long *value);
 
 //UTILS*****
 void		*ft_malloc(size_t bytes);
-void		error_exit(const char *error_msg);
+int			error_exit(const char *error_msg);
 long		gettime(t_time_unit time_unit);
 void		ft_usleep(long sleep_time, t_data *data);
 void		ph_status(t_ph_status status, t_ph *philo);

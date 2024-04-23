@@ -11,4 +11,12 @@
 - A fork is a mutex.
 	- An array of mutexes.
 
-44:50
+1:36:50
+understand:
+- the monitor field of the struct
+- monitor_dinner function/purpose
+
+
+TODO
+understand thinking function, and purpose of bool pre-sim
+relate to de_sync function

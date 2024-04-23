@@ -1,7 +1,28 @@
 #include "philo.h"
 
+//Define a function to simulate a philo in thought, but also:
+//Ensures a philo doesn't immediately aquire forks after eating, reducing contention for resources
+//Helps synchronization
+static void	thinking(t_ph *philo, bool pre_simulation)
+{
+	long	eating_time; //To store durations
+	long	sleeping_time;
+	long	thinking_time;
+
+	if (!pre_simulation)
+		ph_status(THINKING, philo);
+	if (philo->data->ph_total % 2 == 0)
+		return ;
+	eating_time = philo->data->time_to_eat;
+	sleeping_time = philo->data->time_to_sleep;
+	thinking_time = (eating_time * 2) - sleeping_time;
+	if (thinking_time < 0)
+		thinking_time = 0;
+	ft_usleep(thinking_time * 0.5, philo->data); //thinking_time multiplier is arbitrary, the higher the slower execution of the simulation
+}
+
 //Define a function that simulates a philos's eating
-static void	eat(t_ph *philo)
+static void	eating(t_ph *philo)
 {
 	handle_mutex(&philo->left_fork->fork_mutex, LOCK); //Lock the assigned fork to ensure mutual exclusion
 	ph_status(TAKES_LEFTFORK, philo); //Print the status
@@ -11,11 +32,26 @@ static void	eat(t_ph *philo)
 	philo->meal_count++; //Increment to indicate the philo have eaten a/another meal
 	ph_status(EATING, philo); //Print the status
 	ft_usleep(philo->data->time_to_eat, philo->data); //Introduce a delay to simulate the `time_to_eat` the philo spends eating
-	if (philo->data->meals_total > 0 && philo->meal_count == philo->data->meals_total) //TODO comment
-		set_bool(&philo->ph_mutex, &philo->max_meals, true);
-	handle_mutex(&philo->left_fork->fork_mutex, UNLOCK);
+	if (philo->data->meals_total > 0 && philo->meal_count == philo->data->meals_total) //Check if the philo has reached its `max_meals`
+		set_bool(&philo->ph_mutex, &philo->max_meals, true); //If so, set the bool to `true`
+	handle_mutex(&philo->left_fork->fork_mutex, UNLOCK); //Release the forks for the next philo
 	handle_mutex(&philo->right_fork->fork_mutex, UNLOCK);
 }
+
+//TODO and change ft name
+static void	de_synchronize_philos(t_ph *philo)
+{
+	if (philo->data->ph_total % 2 == 0)
+	{
+		if (philo->ph_id % 2 == 0)
+			ft_usleep(30000, philo->data); //TODO why 30000
+	}
+	else
+	{
+		if (philo->ph_id % 2)
+			thinking(philo, true); //TODO why true
+	}
+}	
 
 //Define a function where the current thread/philo eats, sleeps, thinks
 static void	*dining_philos(void *ph_data)
@@ -26,15 +62,15 @@ static void	*dining_philos(void *ph_data)
 	wait_all_threads(philo->data); //Wait for `threads_ready` to become true before all philos can execute concurrently (start simulation)
 	//set_long(&philo->ph_mutex, &philo->meal_time, gettime(MILLISECONDS));
 	//increase_long(&philo->data->access_mutex, &philo->data->threads_running_nbr); //TODO
-	//de_synchronize_philos(philo); //TODO
+	//de_synchronize_philos(philo); //TODO and update name
 	while (!get_bool(&philo->data->access_mutex, &philo->data->end_time)) //Loop until `end_time` is true
 	{
 		if (get_bool(&philo->ph_mutex, &philo->max_meals)) //If `max_meals` is true, break out of loop
 			break ;
-		eating(philo); //TODO
-		write_status(SLEEPING, philo); //Print `philo is sleeping`
+		eating(philo); //Simulate a philo eating
+		ph_status(SLEEPING, philo); //Print `philo is sleeping`
 		ft_usleep(philo->data->time_to_sleep, philo->data); //Introduce a sleep duration for the current philo between eating and thinking. See #1
-		thinking(philo, false); //TODO
+		thinking(philo, false); //Simulate a philo thinking TODO why false
 	}
 	return (NULL);
 }
@@ -56,7 +92,7 @@ void	sim_start(t_data *data)
 			handle_thread(&data->philos_arr[i].ph_thread, dining_philos, &data->philos_arr[i], CREATE);
 			i++;
 		}
-	//handle_thread(&data->monitor, monitor_dinner, data, CREATE); 
+	handle_thread(&data->monitor, monitor_dinner, data, CREATE); 
 	data->start_time = gettime(MILLISECONDS); //Record the start time of the simulation in milliseconds as required
 	set_bool(&data->access_mutex, &data->threads_ready, true); //Set to true to indicate all the threads are ready to start
 	//Simulation starts here
@@ -64,7 +100,7 @@ void	sim_start(t_data *data)
 	while (i < data->ph_total) //For each philo
 		handle_thread(&data->philos_arr[i++].ph_thread, NULL, NULL, JOIN); //Wait (join()) for the current philo/thread to finish its execution, e.g. complete their max_meals
 	set_bool(&data->access_mutex, &data->end_time, true); //TODO comment
-	handle_thread(&data->monitor, NULL, NULL, JOIN);
+	//handle_thread(&data->monitor, NULL, NULL, JOIN);
 }
 
 /*

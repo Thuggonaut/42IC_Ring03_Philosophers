@@ -54,7 +54,7 @@ void	data_init(t_data *data)
 	handle_mutex(&data->access_mutex, INIT); //Initialize the mutex before threads can access to bool values
 	while (i < data->ph_total) //Iterate up to ph_total times, begining with [0]
 	{
-		handle_mutex(&data->forks_arr[i].fork, INIT); //Initialize the mutex for each fork in the fork mutex array
+		handle_mutex(&data->forks_arr[i].fork_mutex, INIT); //Initialize the mutex for each fork in the fork mutex array
 		data->forks_arr[i].fork_id = i; //For each fork/mutex, set the fork_id value
 		i++;
 	}

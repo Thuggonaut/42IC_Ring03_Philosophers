@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 		parse_input(&data, argv); //Parse the input and convert the strings to their required integer values
 		data_init(&data); //Initialise the data, philo and forks arrays for simulation
 		sim_start(&data); //TODO
-		clean(&data); //TODO
+		//clean(&data); //TODO
 	}
 	else //The number of input is incorrect
 	{
