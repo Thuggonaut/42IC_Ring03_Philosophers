@@ -46,8 +46,8 @@ void	data_init(t_data *data)
 
 	i = 0;
 	data->end_time = false; //Ensure that the simulation starts in an active state (simulation has not ended)
-	data->threads_ready = false; //TODO comment
-	//data->threads_running_nbr = 0; //TODO comment
+	data->threads_ready = false; //Threads are yet to be initialised
+	data->active_philos_count = 0; //Threads are yet to be running
 	data->philos_arr = ft_malloc(data->ph_total * sizeof(t_ph)); //Allocate memory for the philos/thread array
 	data->forks_arr = ft_malloc(data->ph_total * sizeof(t_fork)); //Allocate memory for the forks/mutex array
 	handle_mutex(&data->write_mutex, INIT); //Initialize the mutex that controlls thread access to write to the STDOUT

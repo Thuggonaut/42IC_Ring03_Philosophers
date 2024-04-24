@@ -64,9 +64,9 @@ typedef struct s_data
 	long			meals_total; //Track if there is a fifth argument `number_of_times_each_philosopher_must_eat`. If not, assign `-1` indicating it has not been set
 	long			start_time; //Track when the simulation starts
 	bool			end_time; //Track when the simulation ends (when a philo dies, or when all philos have eaten number of `meals_total`)
-	bool			threads_ready; //TODO comment
-	//long			threads_running_nbr; //TODO comment
-	pthread_t		monitor; //TODO comment
+	bool			threads_ready; //Track whether all threads have been initialised and ready to start executing
+	long			active_philos_count; //Track the number of philos/threads running
+	pthread_t		death_check; //A thread, continously checking for a death, in which case, updates `end_time` to true
 	t_fork			*forks_arr; //Pointer to the forks/mutex array
 	t_ph			*philos_arr; //Pointer to the philos array
 	t_mtx			access_mutex; //Controll access to bool values by multiple threads, avoiding data races
@@ -132,5 +132,10 @@ int			error_exit(const char *error_msg);
 long		gettime(t_time_unit time_unit);
 void		ft_usleep(long sleep_time, t_data *data);
 void		ph_status(t_ph_status status, t_ph *philo);
+
+
+//TODO sort
+void		*death_affirm(void *ph_data);
+void		active_thread_counter(t_mtx *mutex, long *value);
 
 #endif

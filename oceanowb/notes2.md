@@ -11,10 +11,9 @@
 - A fork is a mutex.
 	- An array of mutexes.
 
-1:36:50
+1:46:50
 understand:
-- the monitor field of the struct
-- monitor_dinner function/purpose
+- handle lone philo
 
 
 TODO

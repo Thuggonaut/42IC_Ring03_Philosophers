@@ -60,8 +60,8 @@ static void	*dining_philos(void *ph_data)
 
 	philo = (t_ph *)ph_data; //`ph_data` will represent `&data->philos_arr[i]`. In other words, philo will be the `i`th philo
 	wait_all_threads(philo->data); //Wait for `threads_ready` to become true before all philos can execute concurrently (start simulation)
-	//set_long(&philo->ph_mutex, &philo->meal_time, gettime(MILLISECONDS));
-	//increase_long(&philo->data->access_mutex, &philo->data->threads_running_nbr); //TODO
+	set_long(&philo->ph_mutex, &philo->meal_time, gettime(MILLISECONDS)); //Track the time of the dining process
+	active_thread_counter(&philo->data->access_mutex, &philo->data->active_philos_count); //Increment the `active_philos_count` value by 1
 	//de_synchronize_philos(philo); //TODO and update name
 	while (!get_bool(&philo->data->access_mutex, &philo->data->end_time)) //Loop until `end_time` is true
 	{
@@ -92,7 +92,7 @@ void	sim_start(t_data *data)
 			handle_thread(&data->philos_arr[i].ph_thread, dining_philos, &data->philos_arr[i], CREATE);
 			i++;
 		}
-	handle_thread(&data->monitor, monitor_dinner, data, CREATE); 
+	handle_thread(&data->death_check, death_affirm, data, CREATE); //Create one seperate thread for the death_affirm() that checks for deaths
 	data->start_time = gettime(MILLISECONDS); //Record the start time of the simulation in milliseconds as required
 	set_bool(&data->access_mutex, &data->threads_ready, true); //Set to true to indicate all the threads are ready to start
 	//Simulation starts here
@@ -100,7 +100,7 @@ void	sim_start(t_data *data)
 	while (i < data->ph_total) //For each philo
 		handle_thread(&data->philos_arr[i++].ph_thread, NULL, NULL, JOIN); //Wait (join()) for the current philo/thread to finish its execution, e.g. complete their max_meals
 	set_bool(&data->access_mutex, &data->end_time, true); //TODO comment
-	//handle_thread(&data->monitor, NULL, NULL, JOIN);
+	handle_thread(&data->death_check, NULL, NULL, JOIN); //Wait for the death_check thread ti finish executing `death_affirm()`
 }
 
 /*
