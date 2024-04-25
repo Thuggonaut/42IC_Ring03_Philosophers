@@ -1,11 +1,13 @@
 #include "philo.h"
 
+//TODO: current ft not exiting but continues to main. Do we use clean()?
 //Print custom error message and exit
 int	error_exit(const char *error_msg)
 {
 	printf(MAGENTA "%s\n" RESET, error_msg);
 	return (1); //Exit
 }
+
 
 //Define malloc with a NULL return check for re-use and readability
 void	*ft_malloc(size_t bytes)

@@ -41,9 +41,9 @@ void	parse_input(t_data *data, char **argv)
 	data->time_to_eat = ft_atol(argv[3]) * 1000; 
 	data->time_to_sleep = ft_atol(argv[4]) * 1000;
 	//Check against evaluation requirements: should not test when these values are under 60ms
-	if (data->time_to_die < 600000 
-		|| data->time_to_sleep < 600000
-		|| data->time_to_eat < 600000)
+	if (data->time_to_die < 60000 
+		|| data->time_to_sleep < 60000
+		|| data->time_to_eat < 60000)
 		error_exit("Each of the 'time_to' values must exceed 60");
 	if (argv[5]) //Check if there is the optional input of number of meals all philos must eat
 		data->meals_total = ft_atol(argv[5]);

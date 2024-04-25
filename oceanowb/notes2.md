@@ -12,10 +12,9 @@
 	- An array of mutexes.
 
 1:46:50
-understand:
-- handle lone philo
 
 
 TODO
-understand thinking function, and purpose of bool pre-sim
-relate to de_sync function
+- understand thinking function, and purpose of bool pre-sim
+- relate to de_sync function
+- in utils, fix the error_exit 

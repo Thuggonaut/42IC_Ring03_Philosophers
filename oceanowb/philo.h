@@ -137,5 +137,7 @@ void		ph_status(t_ph_status status, t_ph *philo);
 //TODO sort
 void		*death_affirm(void *ph_data);
 void		active_thread_counter(t_mtx *mutex, long *value);
+void		*single_philo(void *index);
+
 
 #endif

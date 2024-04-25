@@ -18,7 +18,7 @@ static void	thinking(t_ph *philo, bool pre_simulation)
 	thinking_time = (eating_time * 2) - sleeping_time;
 	if (thinking_time < 0)
 		thinking_time = 0;
-	ft_usleep(thinking_time * 0.5, philo->data); //thinking_time multiplier is arbitrary, the higher the slower execution of the simulation
+	ft_usleep(thinking_time * 0.5, philo->data); //TODO: thinking_time multiplier is arbitrary, the higher the slower execution of the simulation
 }
 
 //Define a function that simulates a philos's eating
@@ -83,9 +83,8 @@ void	sim_start(t_data *data)
 	i = 0;
 	if (data->meals_total == 0) //If the optional argument is `0`, return to main()
 		return ;
-	/*else if (data->ph_total == 1) //Handle a single philo //TODO
-		handle_thread(&data->philos_arr[0].ph_thread, lone_philo,
-			&data->philos_arr[0], CREATE);*/
+	else if (data->ph_total == 1) //check if the input number of philos is 1
+		handle_thread(&data->philos_arr[0].ph_thread, single_philo, &data->philos_arr[0], CREATE); //Create a thread for the single philo
 	else //If there are more than 1 philos, create each of their threads
 		while (i < data->ph_total) //dining_philos() is passed for each philo to execute concurrently (when `threads_ready` = true)
 		{
