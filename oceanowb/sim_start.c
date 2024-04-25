@@ -98,7 +98,7 @@ void	sim_start(t_data *data)
 	i = 0;
 	while (i < data->ph_total) //For each philo
 		handle_thread(&data->philos_arr[i++].ph_thread, NULL, NULL, JOIN); //Wait (join()) for the current philo/thread to finish its execution, e.g. complete their max_meals
-	set_bool(&data->access_mutex, &data->end_time, true); //TODO comment
+	set_bool(&data->access_mutex, &data->end_time, true); //Update `end_time` to true since all the philos have completed their meals
 	handle_thread(&data->death_check, NULL, NULL, JOIN); //Wait for the death_check thread ti finish executing `death_affirm()`
 }
 

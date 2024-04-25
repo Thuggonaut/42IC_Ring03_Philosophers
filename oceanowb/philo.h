@@ -15,6 +15,7 @@
 
 //CUSTOM MACROS
 # define PH_MAX 200
+//# define EXIT_FAILURE 1
 
 
 //ANSI Escape Sequences for text formatting*****
@@ -132,6 +133,7 @@ int			error_exit(const char *error_msg);
 long		gettime(t_time_unit time_unit);
 void		ft_usleep(long sleep_time, t_data *data);
 void		ph_status(t_ph_status status, t_ph *philo);
+void		free_things(t_data *data);
 
 
 //TODO sort
