@@ -1138,25 +1138,6 @@ int main(void)
 8. Test with 2 philosphers and check the different times: a death delayed by more than 10 ms is unacceptable.
 9. Test with any values of your choice to verify all the requirements. Ensure philosophers die at the right time, that they don't steal forks, etc.
 
-🔸 **BONUS code checks and rationale for each:**
-1. There is one process per philosopher and the main process is not a philosopher (the first process waits for all philosopher processes?).
-2. There are no orphan processes at the end of the execution of this program.
-3. There is a single semaphore that represents the number of forks.
-4. The output is protected against multiple access. To avoid a scrambled display.
-5. The death of a philospher can be checked.
-6. There is a semaphore to prevent a philosopher from dying and starts eating at the same timee.
-
-🔸 **BONUS testing:**
-1. Should not test with more than 200 philosphers.
-2. Should not test when either `time_to_die`, `time_to_eat` or `time_to_sleep` is under 60`ms`.
-3. Test 5 800 200 200. No philosopher should die.
-4. Test with `5 800 200 200 7`: no one should die, and the simulation should stop when all the philosophers has eaten at least 7 times each.
-5. Test with `4 410 200 200`: no one should die.
-6. Test with `4 310 200 100`: one philosopher should die.
-7. Test with 2 philosphers and check the different times: a death delayed by more than 10 ms is unacceptable.
-8. Test with any values of your choice to verify all the requirements. Ensure philosophers die at the right time, that they don't steal forks, etc.
-
-
 # 🔷 References:
 
 [Introduction To Threads (pthreads)](https://www.youtube.com/watch?v=ldJ8WGZVXZk

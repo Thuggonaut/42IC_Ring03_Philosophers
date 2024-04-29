@@ -1,25 +1,34 @@
-#include "philo.h"
+#include "../inc/philo.h"
 
-//Define a function to simulate a philo in thought, but also:
-//Ensures a philo doesn't immediately aquire forks after eating, reducing contention for resources
-//Helps synchronization
+//Define a function to simulate every odd numbered philo in thought. Thinking time = contention time
+//Ensures an odd philo doesn't immediately aquire forks after eating, reducing contention for resources with even neighbours
+//Helps synchronization with even numbered philos
 static void	thinking(t_ph *philo, bool pre_simulation)
 {
-	long	eating_time; //To store durations
+	long	eating_time; //To store durations of actions
 	long	sleeping_time;
 	long	thinking_time;
 
-	if (!pre_simulation)
-		ph_status(THINKING, philo);
-	if (philo->data->ph_total % 2 == 0)
-		return ;
-	eating_time = philo->data->time_to_eat;
-	sleeping_time = philo->data->time_to_sleep;
-	thinking_time = (eating_time * 2) - sleeping_time;
-	if (thinking_time < 0)
-		thinking_time = 0;
-	ft_usleep(thinking_time * 0.4, philo->data); //The thinking_time multiplier is arbitrary, the higher the slower execution of the simulation
+	if (!pre_simulation) //If the simulation has started
+		ph_status(THINKING, philo); //Print the current philo's status as thinking
+	if (philo->data->ph_total % 2 == 0) //If the total number of philos is even
+		return ; //Exit this function as evens are already eating
+	eating_time = philo->data->time_to_eat; //Assign the input value
+	sleeping_time = philo->data->time_to_sleep; //Assign the input value
+	thinking_time = (eating_time * 2) - sleeping_time; //Calculated as twice the eating time minus the sleeping time. See #1
+	if (thinking_time < 0) //If the eating time is greater than the sleeping time, the thinking_time will be negative
+		thinking_time = 0; //Prevent negative values. `0` to represent the minimum thinking time for effiency
+	ft_usleep(thinking_time * 0.3, philo->data); //The thinking_time multiplier is arbitrary, the higher the slower execution of the simulation
 }
+
+//Define a function that synchronizes the philos dining, so they don't all attempt forks at the same time, leading to deadlocks
+static void	synchronize_dining(t_ph *philo)
+{
+	if (philo->ph_id % 2 == 0)
+		ft_usleep(30000, philo->data); //If philo even, introduce a delay of 30 seconds to synchronise with odd philos. See #2
+	else //If philo odd
+		thinking(philo, true); //Initialize the philo as immediately thinking. Set the bool pre_simulation to `true` because we're in the initialization phase
+}	
 
 //Define a function that simulates a philos's eating
 static void	eating(t_ph *philo)
@@ -38,21 +47,6 @@ static void	eating(t_ph *philo)
 	handle_mutex(&philo->right_fork->fork_mutex, UNLOCK);
 }
 
-//TODO and change ft name
-static void	de_synchronize_philos(t_ph *philo)
-{
-	if (philo->data->ph_total % 2 == 0)
-	{
-		if (philo->ph_id % 2 == 0)
-			ft_usleep(30000, philo->data); //TODO why 30000
-	}
-	else
-	{
-		if (philo->ph_id % 2)
-			thinking(philo, true); //TODO why true
-	}
-}	
-
 //Define a function where the current thread/philo eats, sleeps, thinks
 static void	*dining_philos(void *ph_data)
 {
@@ -62,15 +56,15 @@ static void	*dining_philos(void *ph_data)
 	wait_all_threads(philo->data); //Wait for `threads_ready` to become true before all philos can execute concurrently (start simulation)
 	set_long(&philo->ph_mutex, &philo->meal_time, gettime(MILLISECONDS)); //Track the time of the dining process
 	active_thread_counter(&philo->data->access_mutex, &philo->data->active_philos_count); //Increment the `active_philos_count` value by 1
-	//de_synchronize_philos(philo); //TODO and update name
+	synchronize_dining(philo); //TODO and update name
 	while (!get_bool(&philo->data->access_mutex, &philo->data->end_time)) //Loop until `end_time` is true
 	{
 		if (get_bool(&philo->ph_mutex, &philo->max_meals)) //If `max_meals` is true, break out of loop
 			break ;
 		eating(philo); //Simulate a philo eating
 		ph_status(SLEEPING, philo); //Print `philo is sleeping`
-		ft_usleep(philo->data->time_to_sleep, philo->data); //Introduce a sleep duration for the current philo between eating and thinking. See #1
-		thinking(philo, false); //Simulate a philo thinking TODO why false
+		ft_usleep(philo->data->time_to_sleep, philo->data); //Introduce a sleep duration for the current philo between eating and thinking. See #3
+		thinking(philo, false); //Simulate a philo thinking. Set the bool pre_simulation to `false` because we're now in the simulation phase
 	}
 	return (NULL);
 }
@@ -78,7 +72,7 @@ static void	*dining_philos(void *ph_data)
 //Define a function to start the simulation following data initialization
 void	sim_start(t_data *data)
 {
-	int	i;
+	int	i; //Loop counter
 
 	i = 0;
 	if (data->meals_total == 0) //If the optional argument is `0`, return to main()
@@ -106,6 +100,15 @@ void	sim_start(t_data *data)
 NOTES:
 
 #1
+The reason for this calculation is to ensure that the philosopher does not immediately acquire forks after eating, reducing contention for resources.
+
+#2
+The philosopher will not immediately acquire forks after eating, reducing contention for resources.
+	- 30 seconds is arbitrary. 
+	- The higher the value, the slower the execution of the simulation e.g. longer wait period before proceeding with their actions.
+	- The lower the value, the faster the execution of the simulation e.g. shorter wait, but risks deadlocks or starvation.
+
+#3
 A sleep duration between actions simulates the time spent by philos sleeping after eating and before thinking.
 	- This sleep time is essential for simulating realistic behavior.
 	- It ensures the simulation doesn't execute actions instantaneously.

@@ -15,7 +15,6 @@
 
 //CUSTOM MACROS
 # define PH_MAX 200
-//# define EXIT_FAILURE 1
 
 
 //ANSI Escape Sequences for text formatting*****

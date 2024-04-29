@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "../inc/philo.h"
 
 //Define a function to convert the string input arguments into long integers. Static because it's only used for `parse_input()` here
 static long	ft_atol(const char *s)

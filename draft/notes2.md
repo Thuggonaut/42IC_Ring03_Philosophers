@@ -10,3 +10,11 @@
 	- An array of structs
 - A fork is a mutex.
 	- An array of mutexes.
+
+1:46:50
+
+
+TODO
+- understand thinking function, and purpose of bool pre-sim
+- relate to de_sync function
+- in utils, fix the error_exit 

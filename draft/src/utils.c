@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "../inc/philo.h"
 
 //TODO: current ft not exiting but continues to main. Do we use clean()?
 //Print custom error message and exit
