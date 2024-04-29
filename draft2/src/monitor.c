@@ -1,21 +1,19 @@
 #include "../inc/philo.h"
 
-
-//Define a function for a thread to handle a singular philo
-//It takes a single fork, but unable to eat
-//It sleeps then returns to `sim_start()` to die
-void	*single_philo(void *index)
+//Define a function that implements a "busy-wait" loop to wait for all threads to become ready in a multi-threaded environment
+//Since we should test with no more than 200 philos, a spin lock is appropriate. Any larger and spin locks consume CPU cycles leading to inefficiency
+void	wait_all_threads(t_data *data)
 {
-	t_ph	*philo; //Pointer to the philo
+	while (!get_bool(&data->access_mutex, &data->threads_ready)) //While `threads_ready` is false
+		; //Wait until `threads_ready` becomes true
+}
 
-	philo = (t_ph *)index; //The argument passed to `single_philo` will be the index of the philo in `philos_arr` in `handle_thread()`
-	wait_all_threads(philo->data); 
-	set_long(&philo->ph_mutex, &philo->meal_time, gettime(MILLISECONDS)); //Record the start time of the dining process
-	active_thread_counter(&philo->data->access_mutex, &philo->data->active_philos_count); //Increment the count, to indicate this philo is now active
-	ph_status(TAKES_LEFTFORK, philo); //Doesn't really, we just need the printing
-	while (!get_bool(&philo->data->access_mutex, &philo->data->end_time)) //Until the end_time
-		ft_usleep(200, philo->data); //philo sleeps for 200 microseconds (it waits for the second fork, but it doesnt exist)
-	return (NULL);
+//Define a function to increment the `active_philos_count` field in `t_data` 
+void	active_thread_counter(t_mtx *mutex, long *value)
+{	
+	handle_mutex(mutex, LOCK);
+	(*value)++;
+	handle_mutex(mutex, UNLOCK);
 }
 
 //Define a function that checks if a philo has died based on the time elapsed since their last meal
@@ -70,15 +68,6 @@ void	*death_affirm(void *ph_data)
 	}
 	return (NULL);
 }
-
-//Define a function to increment the `active_philos_count` field in `t_data` 
-void	active_thread_counter(t_mtx *mutex, long *value)
-{	
-	handle_mutex(mutex, LOCK);
-	(*value)++;
-	handle_mutex(mutex, UNLOCK);
-}
-
 
 /*
 NOTE:

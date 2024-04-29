@@ -114,31 +114,33 @@ typedef enum e_ftcode
 void		parse_input(t_data *data, char **argv);
 void		data_init(t_data *data);
 void		sim_start(t_data *data);
+void		*single_philo(void *index);
 
 
 //THREADS & MUTEXES HANDLERS*****
 void		handle_mutex(t_mtx *mtx, t_ftcode ftcode);
 void		handle_thread(pthread_t *thread_info, void *(*foo)(void *), void *t_data, t_ftcode ftcode);
-void		wait_all_threads(t_data *data);
+
+
+//PROTECT VARIABLES*****
 void		set_bool(t_mtx	*mutex, bool *dst, bool value);
 bool		get_bool(t_mtx *mutex, bool *value);
 void		set_long(t_mtx *mutex, long *dst, long value);
 long		get_long(t_mtx *mutex, long *value);
 
 
+//MONITORING*****
+void		wait_all_threads(t_data *data);
+void		active_thread_counter(t_mtx *mutex, long *value);
+void		*death_affirm(void *ph_data);
+void		ph_status(t_ph_status status, t_ph *philo);
+
+
 //UTILS*****
-void		*ft_malloc(size_t bytes);
 void		error_exit(const char *error_msg);
+void		*ft_malloc(size_t bytes);
 long		gettime(t_time_unit time_unit);
 void		ft_usleep(long sleep_time, t_data *data);
-void		ph_status(t_ph_status status, t_ph *philo);
 void		free_things(t_data *data);
-
-
-//TODO sort
-void		*death_affirm(void *ph_data);
-void		active_thread_counter(t_mtx *mutex, long *value);
-void		*single_philo(void *index);
-
 
 #endif

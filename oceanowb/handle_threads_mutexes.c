@@ -92,11 +92,3 @@ long	get_long(t_mtx *mutex, long *value)
 	handle_mutex(mutex, UNLOCK);
 	return (retrieve);
 }
-
-//Define a function to increment the `active_philos_count` field in `t_data` 
-void	active_thread_counter(t_mtx *mutex, long *value)
-{	
-	handle_mutex(mutex, LOCK);
-	(*value)++;
-	handle_mutex(mutex, UNLOCK);
-}

@@ -38,7 +38,6 @@ static long	ft_atol(const char *s)
 	return (res);
 }
 
-
 //Should not test when either `time_to_die`, `time_to_eat` or `time_to_sleep` is under 60`ms`
 //Define a function to parse the input and convert the strings to their required integer values
 void	parse_input(t_data *data, char **argv)
