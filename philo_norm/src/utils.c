@@ -1,6 +1,5 @@
-#include "philo.h"
+#include "../inc/philo.h"
 
-//TODO: current ft not exiting but continues to main. Do we use clean()?
 //Print custom error message and exit
 void	error_exit(const char *error_msg)
 {
@@ -21,14 +20,6 @@ void	*ft_malloc(size_t bytes)
 		return (NULL);
 	}
 	return (retrieve);
-}
-
-//Define a function that implements a "busy-wait" loop to wait for all threads to become ready in a multi-threaded environment
-//Since we should test with no more than 200 philos, a spin lock is appropriate. Any larger and spin locks consume CPU cycles leading to inefficiency
-void	wait_all_threads(t_data *data)
-{
-	while (!get_bool(&data->access_mutex, &data->threads_ready)) //While `threads_ready` is false
-		; //Wait until `threads_ready` becomes true
 }
 
 //Define a function that retrieves the current system time and returns it in converted units

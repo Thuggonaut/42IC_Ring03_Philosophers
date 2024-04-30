@@ -7,7 +7,7 @@ static long	ft_atol(const char *s)
 	int			len; //To check the string length is not > 10, as INT_MAX has 10 digits
 	
 	res = 0;
-	while ((*s == 32 || *s >= 9 && *s <= 13)) //Skip leading whitespaces
+	while ((*s == 32 || (*s >= 9 && *s <= 13))) //Skip leading whitespaces
 		s++;
 	if (*s == '-' || *s == '+') //Check for `-` signs, and skip `+` signs
 	{

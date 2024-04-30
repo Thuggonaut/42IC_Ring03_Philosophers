@@ -1,9 +1,11 @@
 #include "../inc/philo.h"
 
 //Define a function to check the values returned from mutex operations, and exit upon error
+//Non-zero return values of mutex operations indicate an error
 static void	mutex_error_check(int status, t_ftcode ftcode)
 {
-	if (status != 0)
+	if (status != 0 && (ftcode == LOCK || ftcode == UNLOCK 
+		|| ftcode == INIT || ftcode == DESTROY))
 	{
 		error_exit("Mutex error");
 		return ;
@@ -11,9 +13,10 @@ static void	mutex_error_check(int status, t_ftcode ftcode)
 }
 
 //Define a function to check the values returned from thread functions, and exit upon error
+//Non-zero return values of mutex operations indicate an error
 static void	thread_error_check(int status, t_ftcode ftcode)
 {
-	if (status != 0)
+	if (status != 0  && (ftcode == CREATE || ftcode == JOIN || ftcode == DETACH))
 	{
 		error_exit("Thread error");
 		return ;
