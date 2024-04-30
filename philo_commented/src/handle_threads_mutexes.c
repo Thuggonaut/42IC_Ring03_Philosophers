@@ -1,6 +1,6 @@
 #include "../inc/philo.h"
 
-//Define a function to check the values returned from mutex operations, and exit upon error
+//Define a function to check the values returned from mutex operations, and return (and terminating) upon error
 //Non-zero return values of mutex operations indicate an error
 static void	mutex_error_check(int status, t_ftcode ftcode)
 {
@@ -12,7 +12,7 @@ static void	mutex_error_check(int status, t_ftcode ftcode)
 	}
 }
 
-//Define a function to check the values returned from thread functions, and exit upon error
+//Define a function to check the values returned from thread functions, and return (and terminating) upon error
 //Non-zero return values of mutex operations indicate an error
 static void	thread_error_check(int status, t_ftcode ftcode)
 {
@@ -24,6 +24,7 @@ static void	thread_error_check(int status, t_ftcode ftcode)
 }
 
 //Define a wrap around function that handles the mutex operations for simplification and readability
+//It performs the mutex operations and checks the values returned from them
 void	handle_mutex(t_mtx *mtx, t_ftcode ftcode)
 {
 	if (ftcode == LOCK)
@@ -42,6 +43,7 @@ void	handle_mutex(t_mtx *mtx, t_ftcode ftcode)
 } 
 
 //Define a wrap around function that handles the thread functions for simplification and readability
+//It performs the thread operations and checks the values returned from them
 void	handle_thread(pthread_t *thread_info, void *(*foo)(void *),
 		void *t_data, t_ftcode ftcode)
 {

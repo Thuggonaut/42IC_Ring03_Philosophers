@@ -1117,7 +1117,7 @@ int main(void)
 2. Does not have memory leaks.
 3. No norm errors.
 4. No global variables.
-5. Defend if the program doesn't work on slower machines.
+5. Defend if the program doesn't work on slower machines and test with modifying the thinking_time multiplier.
 
 🔸 **Code checks and rationale for each:**
 1. There is one thread per philosopher.

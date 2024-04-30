@@ -2,7 +2,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data; //TODO comment
+	t_data	data; //Declare a data struct for the philo simulation
 
 	if (argc == 5 || argc == 6) //Check for correct number of input arguments, if so, execute the following
 	{
@@ -11,12 +11,9 @@ int	main(int argc, char **argv)
 		sim_start(&data); //Start the simulation, where the philos eat, think, sleep
 		free_things(&data); //Free up memory and clean before termination
 	}
-	else //The number of input is incorrect
-	{
-		error_exit("Input Error\n"
-			YELLOW "Please enter: ./philo <no. of philos> <time_to_die> "
+	else //If the number of input is incorrect, print options and exit
+		error_exit("Input Error\n" YELLOW "Please enter: ./philo <no. of philos> <time_to_die> "
 			"<time_to_eat> <time_to_sleep> <max_meals> (optional)\n"
 			"For example: ./philo 5 800 200 200 7" RESET);
-	}
 	return (0);
 }

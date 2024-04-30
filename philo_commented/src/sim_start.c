@@ -56,7 +56,7 @@ static void	*dining_philos(void *ph_data)
 	wait_all_threads(philo->data); //Wait for `threads_ready` to become true before all philos can execute concurrently (start simulation)
 	set_long(&philo->ph_mutex, &philo->meal_time, gettime(MILLISECONDS)); //Track the time of the dining process
 	active_thread_counter(&philo->data->access_mutex, &philo->data->active_philos_count); //Increment the `active_philos_count` value by 1
-	synchronize_dining(philo); //TODO and update name
+	synchronize_dining(philo); //Initialize synchronization of each philo to avoid deadlocks and resource contention
 	while (!get_bool(&philo->data->access_mutex, &philo->data->end_time)) //Loop until `end_time` is true
 	{
 		if (get_bool(&philo->ph_mutex, &philo->max_meals)) //If `max_meals` is true, break out of loop

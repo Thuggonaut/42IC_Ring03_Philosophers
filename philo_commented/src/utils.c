@@ -1,6 +1,6 @@
 #include "../inc/philo.h"
 
-//Print custom error message and exit
+//Print custom error message and return to function
 void	error_exit(const char *error_msg)
 {
 	printf(MAGENTA "%s\n" RESET, error_msg);
@@ -9,6 +9,7 @@ void	error_exit(const char *error_msg)
 
 
 //Define malloc with a NULL return check for re-use and readability
+//It returns a pointer to the allocated memory on success and NULL on failure
 void	*ft_malloc(size_t bytes)
 {
 	void	*retrieve;
