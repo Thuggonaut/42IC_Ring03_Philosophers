@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tquemato <tquemato@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/30 23:16:38 by tquemato          #+#    #+#             */
+/*   Updated: 2024/04/30 23:38:10 by tquemato         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/philo.h"
 
 void	wait_all_threads(t_data *data)
@@ -5,9 +17,9 @@ void	wait_all_threads(t_data *data)
 	while (!get_bool(&data->access_mutex, &data->threads_ready))
 		;
 }
- 
+
 void	active_thread_counter(t_mtx *mutex, long *value)
-{	
+{
 	handle_mutex(mutex, LOCK);
 	(*value)++;
 	handle_mutex(mutex, UNLOCK);
@@ -20,7 +32,8 @@ static bool	philo_died(t_ph *philo)
 
 	if (get_bool(&philo->ph_mutex, &philo->max_meals))
 		return (false);
-	elapsed = gettime(MILLISECONDS) - get_long(&philo->ph_mutex, &philo->meal_time);
+	elapsed = gettime(MILLISECONDS) - get_long(&philo->ph_mutex,
+			&philo->meal_time);
 	dying_time = philo->data->time_to_die / 1000;
 	if (elapsed > dying_time)
 		return (true);
@@ -45,12 +58,15 @@ void	*death_affirm(void *ph_data)
 	t_data	*data;
 
 	data = (t_data *)ph_data;
-	while (!all_philos_active(&data->access_mutex, &data->active_philos_count, data->ph_total))
+	while (!all_philos_active(&data->access_mutex,
+			&data->active_philos_count,
+			data->ph_total))
 		;
 	while (!get_bool(&data->access_mutex, &data->end_time))
 	{
 		i = 0;
-		while (i < data->ph_total && !get_bool(&data->access_mutex, &data->end_time))
+		while (i < data->ph_total && !get_bool(&data->access_mutex,
+				&data->end_time))
 		{
 			if (philo_died(data->philos_arr + i))
 			{

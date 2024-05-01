@@ -80,11 +80,13 @@ void	sim_start(t_data *data)
 	else if (data->ph_total == 1) //check if the input number of philos is 1
 		handle_thread(&data->philos_arr[0].ph_thread, single_philo, &data->philos_arr[0], CREATE); //Create a thread for the single philo
 	else //If there are more than 1 philos, create each of their threads
+	{
 		while (i < data->ph_total) //dining_philos() is passed for each philo to execute concurrently (when `threads_ready` = true)
 		{
 			handle_thread(&data->philos_arr[i].ph_thread, dining_philos, &data->philos_arr[i], CREATE);
 			i++;
 		}
+	}
 	handle_thread(&data->death_check, death_affirm, data, CREATE); //Create one seperate thread for the death_affirm() that checks for deaths
 	data->start_time = gettime(MILLISECONDS); //Record the start time of the simulation in milliseconds as required
 	set_bool(&data->access_mutex, &data->threads_ready, true); //Set to true to indicate all the threads are ready to start

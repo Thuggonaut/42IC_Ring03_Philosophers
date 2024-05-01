@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   data_init.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tquemato <tquemato@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 23:16:00 by tquemato          #+#    #+#             */
-/*   Updated: 2024/04/30 23:34:24 by tquemato         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../inc/philo.h"
 
 void	*single_philo(void *index)
@@ -19,8 +7,7 @@ void	*single_philo(void *index)
 	philo = (t_ph *)index;
 	wait_all_threads(philo->data);
 	set_long(&philo->ph_mutex, &philo->meal_time, gettime(MILLISECONDS));
-	active_thread_counter(&philo->data->access_mutex,
-		&philo->data->active_philos_count);
+	active_thread_counter(&philo->data->access_mutex, &philo->data->active_philos_count);
 	ph_status(TAKES_LEFTFORK, philo);
 	while (!get_bool(&philo->data->access_mutex, &philo->data->end_time))
 		ft_usleep(200, philo->data);

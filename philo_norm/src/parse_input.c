@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tquemato <tquemato@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/30 23:16:45 by tquemato          #+#    #+#             */
+/*   Updated: 2024/04/30 23:48:45 by tquemato         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/philo.h"
 
-static long	ft_atol(const char *s)
+static long	ft_atol(const char *s) //todo less than 25 lines
 {
 	long	res;
 	int		len;
-	
+
 	res = 0;
 	while ((*s == 32 || (*s >= 9 && *s <= 13)))
 		s++;
@@ -31,7 +43,7 @@ static long	ft_atol(const char *s)
 	}
 	if (len > 10 || res > INT_MAX)
 	{
-		error_exit("Input Error: The value cannot exceed the INT_MAX value 2147483647");
+		error_exit("Input Error: The value cannot exceed 2147483647");
 		return (1);
 	}
 	return (res);
@@ -48,7 +60,8 @@ void	parse_input(t_data *data, char **argv)
 	data->time_to_die = ft_atol(argv[2]) * 1000;
 	data->time_to_eat = ft_atol(argv[3]) * 1000;
 	data->time_to_sleep = ft_atol(argv[4]) * 1000;
-	if (data->time_to_die < 60000 || data->time_to_sleep < 60000 || data->time_to_eat < 60000)
+	if (data->time_to_die < 60000 || data->time_to_sleep < 60000
+		|| data->time_to_eat < 60000)
 	{
 		error_exit("Input Error: Each of the 'time_to' values must exceed 60");
 		return ;
