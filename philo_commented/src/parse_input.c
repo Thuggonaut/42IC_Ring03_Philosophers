@@ -26,8 +26,7 @@ static long	ft_atol(const char *s)
 	len = 0;
 	while (*s >= '0' && *s <= '9') //Traverse the string input and convert into digits
 	{
-		res = (res * 10) + (*s - '0');
-		s++;
+		res = (res * 10) + (*s++ - '0');
 		len++;
 	}
 	if (len > 10 || res > INT_MAX) //Check if the input is 10 or more digits, and if the result is > INT_MAX

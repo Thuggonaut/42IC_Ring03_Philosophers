@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tquemato <tquemato@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/30 23:17:21 by tquemato          #+#    #+#             */
+/*   Updated: 2024/04/30 23:46:25 by tquemato         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/philo.h"
 
 void	error_exit(const char *error_msg)
@@ -21,8 +33,8 @@ void	*ft_malloc(size_t bytes)
 
 long	gettime(t_time_unit time_unit)
 {
-	struct timeval current_time;
-		
+	struct timeval	current_time;
+
 	if (gettimeofday(&current_time, NULL) != 0)
 	{
 		error_exit("Error: gettimeofday failed");

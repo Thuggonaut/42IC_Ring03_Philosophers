@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"philo.h": "c",
-		"wait.h": "c"
+		"wait.h": "c",
+		"system_error": "c"
 	}
 }
