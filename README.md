@@ -6,7 +6,7 @@
 # Contents:
 1. [Introduction](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-introduction)
 2. [The rules](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-the-rules)
-3. [The Mandatory part](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-mandatory-rules) (No bonus)
+3. [The Mandatory part](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-mandatory-rules)
 4. [External functions to learn](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-external-functions-to-learn)
 5. [Pseudo code](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-pseudo-code)
 6. [Evaluation Checklist](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-evaluation-checklist)
