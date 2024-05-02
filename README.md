@@ -655,8 +655,8 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
 
 # 🔷 References:
 
-[Introduction To Threads (pthreads)](https://www.youtube.com/watch?v=ldJ8WGZVXZk
-- An introduction on how to use threads in C with the pthread.h library (POSIX thread library).)
+[Introduction To Threads (pthreads)](https://www.youtube.com/watch?v=ldJ8WGZVXZk)
+- An introduction on how to use threads in C with the pthread.h library (POSIX thread library).
 
 [Unix Threads in C](https://youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2&si=0QgGb_xmrDESzk62)
 - Playlist of all things threads related.
@@ -666,4 +666,3 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
 
 [DexTutor: Dining Philosopher Problem program in C](https://www.youtube.com/watch?v=27lu1lwvoGY&t=49s)
 - Demonstration of creating threads.
-
