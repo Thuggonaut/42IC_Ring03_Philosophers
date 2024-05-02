@@ -140,15 +140,15 @@ pthread_mutex_unlock(&mutex);
 
 # 🔹 External functions to learn:
 
-1. usleep: Suspend the execution of a program to introduce a delay for a specified number of microseconds.
-2. gettimeofday: Obtain the current time.
-3. pthread_create: Create a new thread within a program.
-4. pthread_detach: Detach the newly created thread to allow it to run independently.
-5. pthread_join: Wait for the thread with ID thread_id to finish its execution.
-6. pthread_mutex_init: Initialize a mutex.
-7. pthread_mutex_destroy: Destroy the mutex after it has been used.
-8. pthread_mutex_lock: Lock the mutex before accessing and updating the shared data.
-9. pthread_mutex_unlock: Unlock the mutex, allowing other threads to access the shared resource.
+1. 🔸 **usleep:** Suspend the execution of a program to introduce a delay for a specified number of microseconds.
+2. 🔸 **gettimeofday:** Obtain the current time.
+3. 🔸 **pthread_create:** Create a new thread within a program.
+4. 🔸 **pthread_detach: **Detach the newly created thread to allow it to run independently.
+5. 🔸 **pthread_join:** Wait for the thread with ID thread_id to finish its execution.
+6. 🔸 **pthread_mutex_init:** Initialize a mutex.
+7. 🔸 **pthread_mutex_destroy:** Destroy the mutex after it has been used.
+8. 🔸 **pthread_mutex_lock: **Lock the mutex before accessing and updating the shared data.
+9. 🔸 **pthread_mutex_unlock:** Unlock the mutex, allowing other threads to access the shared resource.
 
 Also permitted:
 memset, printf, malloc, free, write
