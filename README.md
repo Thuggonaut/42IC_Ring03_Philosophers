@@ -4,9 +4,9 @@
 - Learn about creating threads and mutexes
 
 # Contents:
-1. Introduction
-2. The rules
-3. The Mandatory part (No bonus)
+1. [Introduction](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-introduction)
+2. [The rules](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-the-rules)
+3. [The Mandatory part](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-mandatory-rules) (No bonus)
 4. External functions to learn
 5. Pseudo code
 6. Evaluation Checklist
@@ -138,7 +138,7 @@ pthread_mutex_unlock(&mutex);
 	- Once the next thread aquires the lock, it'll execute the code, with the updated variables/data. 
 
 
-# 🔹 External functions to learn:
+# 🔷 External functions to learn:
 
 1. 🔸 **usleep:** _Suspend the execution of a program to introduce a delay for a specified number of microseconds._
 2. 🔸 **gettimeofday:** _Obtain the current time._
