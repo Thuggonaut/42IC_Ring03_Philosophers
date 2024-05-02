@@ -4,10 +4,8 @@
 //LIBRARIES*****
 # include <stdio.h> //To call printf() for printing to the STDOUT
 # include <stdlib.h> //To call malloc(), free() for memory management
-# include <sys/wait.h> //To call waitpid()
 # include <unistd.h> //To call write(), usleep()
 # include <stdbool.h> //To use boolean values
-# include <string.h> //To call memset()
 # include <pthread.h> //For thread related functions
 # include <sys/time.h> //To call gettimeofday()
 # include <limits.h> //To use the MIN and MAX macros
