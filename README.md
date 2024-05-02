@@ -3,7 +3,7 @@
 - Learn the basics of threading a process
 - Learn about creating threads and mutexes
 
-# Contents:
+# [Contents:](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#contents)
 1. [Introduction](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-introduction)
 2. [The rules](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-the-rules)
 3. [The Mandatory part](https://github.com/Thuggonaut/42IC_Ring03_Philosophers/blob/main/README.md#-mandatory-rules) (No bonus)
