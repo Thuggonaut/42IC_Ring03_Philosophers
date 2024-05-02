@@ -1,8 +1,16 @@
 # 🍝 Philosophers
-🔹 Objectives: (#TODO)
+🔹 Objectives:
+- Learn the basics of threading a process
+- Learn about creating threads and mutexes
 
 # Contents:
-(#TODO)
+1. Introduction: To succeed the project
+2. The rules
+3. The Mandatory part (No bonus)
+4. External functions to learn
+5. Pseudo code
+6. Evaluation Checklist
+7. References
 
 # 🔷 To succeed this assignment:
 - One or more philosophers sit at a round table.
@@ -129,7 +137,7 @@ pthread_mutex_unlock(&mutex);
 	- Once the next thread aquires the lock, it'll execute the code, with the updated variables/data. 
 
 
-## 🔹 External functions to learn:
+# 🔹 External functions to learn:
 
 1. memset
 2. usleep
