@@ -91,10 +91,10 @@ Create a simulation of philosphers dining:
 			- only one thread is executed at any given time. ![Not parralel](image-2.png)
 - ***🧐 How to create a thread?***
 - We use the <pthread.h> library.
-	🔸 Call `pthread_create()` to create a thread.
-	🔸 Give `pthread_create()` a function to run.
+	1. 🔸Call `pthread_create()` to create a thread.
+	2. 🔸Give `pthread_create()` a function to run.
 		- the function will run in it's own thread. 
-	🔸 Call `pthread_join()` to join the newly created thread back to the main thread. 
+	3. 🔸Call `pthread_join()` to join the newly created thread back to the main thread. 
 		- `pthread_join()` by the time it runs, will pause and wait until the created thread finishes execution if it hasn't already [img]
 
 
