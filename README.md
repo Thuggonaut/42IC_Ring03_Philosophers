@@ -4,7 +4,7 @@
 - Learn about creating threads and mutexes
 
 # Contents:
-1. Introduction: To succeed the project
+1. Introduction
 2. The rules
 3. The Mandatory part (No bonus)
 4. External functions to learn
@@ -12,7 +12,8 @@
 6. Evaluation Checklist
 7. References
 
-# 🔷 To succeed this assignment:
+# 🔷 Introduction:
+Create a simulation of philosphers dining:
 - One or more philosophers sit at a round table.
 	- There is a large bowl of spaghetti in the middle of the table.
 - The philosophers alternatively eat, think, or sleep.
@@ -80,11 +81,11 @@
 - ***🧐 What is a thread?***
 	- Threads can improve performance.
 	- Single threaded program
-		- One sequence of statements that executes over time [img]
+		- One sequence of statements that executes over time ![Single threaded](image.png)
 	- Multi threaded program
 		- Multiple sequence of statements that executes over the same period of time
 		- Parallel execution:
-			- Not always possible to execute threads in parallel due to hard/software [img]
+			- Though, not always possible to execute threads in parallel due to hard/software [img]
 		- Concurrent execution when parallel not possible:
 			- CPU switches back and forth bewtween multiple threads
 			- only one thread is executed at any given time [img]
