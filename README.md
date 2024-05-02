@@ -666,3 +666,5 @@ Oceano's walkthrough of the project.
 
 - [DexTutor: Dining Philosopher Problem program in C](https://www.youtube.com/watch?v=27lu1lwvoGY&t=49s)
 Demonstration of creating threads.
+
+# Kill it 😎
