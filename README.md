@@ -140,62 +140,18 @@ pthread_mutex_unlock(&mutex);
 
 # 🔹 External functions to learn:
 
-1. memset
-2. usleep
-3. gettimeofday
-4. pthread_create
-5. pthread_detach
-6. pthread_join
-7. pthread_mutex_init
-8. pthread_mutex_destroy
-9. pthread_mutex_lock
-10. pthread_mutex_unlock
+1. usleep: Suspend the execution of a program to introduce a delay for a specified number of microseconds.
+2. gettimeofday: Obtain the current time.
+3. pthread_create: Create a new thread within a program.
+4. pthread_detach: Detach the newly created thread to allow it to run independently.
+5. pthread_join: Wait for the thread with ID thread_id to finish its execution.
+6. pthread_mutex_init: Initialize a mutex.
+7. pthread_mutex_destroy: Destroy the mutex after it has been used.
+8. pthread_mutex_lock: Lock the mutex before accessing and updating the shared data.
+9. pthread_mutex_unlock: Unlock the mutex, allowing other threads to access the shared resource.
 
 Also permitted:
-printf, malloc, free, write
-
-<table>
-	<tr>
-		<th> 🔸 memset() </th>
-		<th> </th>
-	</tr>
-	<tr>
-		<th> Use </th>
-		<td> Initialize or clear blocks of memory to a specific value </td>
-	</tr>
-	<tr>
-		<th> Library & Syntax </th>
-		<td> 
-
-```c
-<string.h>
-
-void *memset(void *ptr, int value, size_t num);
-``` 
-</td>
-		</tr>
-		<tr>
-		<th> Example </th>
-		<td>
-
-```c
-#include <stdio.h>
-#include <string.h>
-
-int main(void) 
-{
-	char str[20];
-
-	// Set the first 10 bytes of the 'str' array to the ASCII value of 'A'
-	memset(str, 'A', 10);
-
-	printf("After memset: %s\n", str);
-	return (0);
-}
-```
-</td>
-		</tr>
-</table>
+memset, printf, malloc, free, write
 
 <table>
 	<tr>
