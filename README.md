@@ -81,21 +81,21 @@ Create a simulation of philosphers dining:
 - ***🧐 What is a thread?***
 	- Threads can improve performance.
 	- Single threaded program
-		- One sequence of statements that executes over time ![Single threaded](image.png)
+		- One sequence of statements that executes over time ![Single threaded](single_thread.png)
 	- Multi threaded program
 		- Multiple sequence of statements that executes over the same period of time
 		- Parallel execution:
-			- Though, not always possible to execute threads in parallel due to hard/software [img]
+			- Though, not always possible to execute threads in parallel due to hard/software ![Multi threaded](multi_thread.png)
 		- Concurrent execution when parallel not possible:
 			- CPU switches back and forth bewtween multiple threads
-			- only one thread is executed at any given time [img]
+			- only one thread is executed at any given time ![not parralell](concurrent_not_parallel.png)
 - ***🧐 How to create a thread?***
 - We use the <pthread.h> library.
 	1. Call `pthread_create()` to create a thread.
 	2. Give `pthread_create()` a function to run.
 		- the function will run in it's own thread. 
 	3. Call `pthread_join()` to join the newly created thread back to the main thread. 
-		- `pthread_join()` by the time it runs, will pause and wait until the created thread finishes execution if it hasn't already [img]
+		- `pthread_join()` by the time it runs, will pause and wait until the created thread finishes execution if it hasn't already. 
 
 
 ### 2️⃣ There is one fork between each pair of philosophers. 
