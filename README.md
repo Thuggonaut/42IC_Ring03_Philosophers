@@ -1,4 +1,4 @@
-# 🍝 Philosophers
+# 🍝 Philosophers (IN PROGRESS)
 🔹 Objectives:
 - Learn the basics of threading a process
 - Learn about creating threads and mutexes
