@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 			return (1);
 	}
 	else //If the number of input is incorrect, print options and exit
-		error_msg("Input Error\n" YELLOW "Please enter: ./philo <no. of philos> <time_to_die> "
+		error_exit("Input Error\n" YELLOW "Please enter: ./philo <no. of philos> <time_to_die> "
 			"<time_to_eat> <time_to_sleep> <max_meals> (optional)\n"
 			"For example: ./philo 5 800 200 200 7" RESET);
 	return (0);

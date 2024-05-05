@@ -6,7 +6,7 @@
 /*   By: tquemato <tquemato@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 23:16:45 by tquemato          #+#    #+#             */
-/*   Updated: 2024/05/05 19:16:10 by tquemato         ###   ########.fr       */
+/*   Updated: 2024/05/05 23:52:30 by tquemato         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ static long	ft_atol(const char *s)
 	while (whitespace(*s))
 		s++;
 	if (*s == '-')
-	{
-		error_msg("Input Error: Positive values only");
 		return (0);
-	}
 	if (!is_digit(*s))
 	{
 		error_msg("Input Error: Digit values only");
@@ -44,7 +41,7 @@ static long	ft_atol(const char *s)
 	return (res);
 }
 
-static long	check_int_max(t_data *data, char *argv)
+static long	check_int_range(t_data *data, char *argv)
 {
 	long	input;
 
@@ -54,20 +51,25 @@ static long	check_int_max(t_data *data, char *argv)
 		error_msg("Input Error: The value cannot exceed 2147483647");
 		data->error_flag = 1;
 	}
+	if (input < 1)
+	{
+		error_msg("Input Error: Positive values only");
+		data->error_flag = 1;
+	}
 	return (input);
 }
 
 void	parse_input(t_data *data, char **argv)
 {
-	data->ph_total = check_int_max(data, argv[1]);
+	data->ph_total = check_int_range(data, argv[1]);
 	if (data->ph_total > PH_MAX || data->ph_total < 1)
 	{
 		error_msg("Input Error: Total number of philos must be 1 - 200");
 		data->error_flag = 1;
 	}
-	data->time_to_die = check_int_max(data, argv[2]) * 1000;
-	data->time_to_eat = check_int_max(data, argv[3]) * 1000;
-	data->time_to_sleep = check_int_max(data, argv[4]) * 1000;
+	data->time_to_die = check_int_range(data, argv[2]) * 1000;
+	data->time_to_eat = check_int_range(data, argv[3]) * 1000;
+	data->time_to_sleep = check_int_range(data, argv[4]) * 1000;
 	if (data->time_to_die < 60000 || data->time_to_sleep < 60000
 		|| data->time_to_eat < 60000)
 	{
@@ -75,7 +77,7 @@ void	parse_input(t_data *data, char **argv)
 		data->error_flag = 1;
 	}
 	if (argv[5])
-		data->meals_total = check_int_max(data, argv[5]);
+		data->meals_total = check_int_range(data, argv[5]);
 	else
 		data->meals_total = -1;
 }

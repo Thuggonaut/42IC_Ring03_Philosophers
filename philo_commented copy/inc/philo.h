@@ -136,7 +136,7 @@ void		ph_status(t_ph_status status, t_ph *philo);
 
 
 //UTILS*****
-void		error_msg(const char *error_msg);
+void		error_exit(const char *error_msg);
 void		*ft_malloc(size_t bytes);
 long		gettime(t_time_unit time_unit);
 void		ft_usleep(long sleep_time, t_data *data);
