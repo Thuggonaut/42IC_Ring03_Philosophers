@@ -54,7 +54,7 @@ re: 					fclean all
 # Checks for memory leaks
 leaks: re
 	@echo "\033[1;33m\nChecking for memory leaks...\033[0m"
-	leaks --atExit ./$(NAME) 5 800 200 200 3
+	leaks --atExit -- ./$(NAME) 5 800 200 200 3
 
 valgrind_leaks: re
 	@echo "\033[1;33m\nChecking for memory leaks with valgrind...\033[0m"
